@@ -1,0 +1,12 @@
+.gradle/
+build/
+local.properties
+.idea/
+.kotlin/
+*.iml
+*.jks
+*.keystore
+.DS_Store
+iosApp/build/
+xcuserdata/
+kotlin-js-store/

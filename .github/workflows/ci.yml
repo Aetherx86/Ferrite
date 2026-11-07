@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  android-and-web:
+    name: Tests, Android and web builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
+      - name: The version is the same everywhere
+        run: |
+          gradle_version=$(grep '^ferrite.versionName=' gradle.properties | cut -d= -f2)
+          grep -q "VERSION = \"$gradle_version\"" shared/src/commonMain/kotlin/dev/aetherx86/ferrite/BuildInfo.kt
+          grep -q "MARKETING_VERSION = $gradle_version;" iosApp/iosApp.xcodeproj/project.pbxproj
+      - name: Tests
+        run: ./gradlew :shared:testAndroidHostTest --console=plain
+      - name: Android
+        run: ./gradlew :androidApp:assembleRelease --console=plain
+      - name: Web
+        run: ./gradlew :shared:wasmJsBrowserDistribution --console=plain

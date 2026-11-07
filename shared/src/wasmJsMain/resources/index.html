@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ferrite</title>
+  <meta name="theme-color" content="#06080E">
+  <style>
+    html, body, #app { margin: 0; width: 100%; height: 100%; background: #06080E; overflow: hidden; }
+    #app { position: fixed; inset: 0; }
+    #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; color: #828B9B;
+      font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="loading">불러오는 중</div>
+  <div id="app"></div>
+  <script>
+    new MutationObserver(function (_, o) {
+      if (document.querySelector('#app canvas')) { document.getElementById('loading').remove(); o.disconnect(); }
+    }).observe(document.getElementById('app'), { childList: true, subtree: true });
+  </script>
+  <script src="ferrite.js"></script>
+</body>
+</html>
