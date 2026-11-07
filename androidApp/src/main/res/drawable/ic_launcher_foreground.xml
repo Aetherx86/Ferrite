@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <!-- A line running through a station, with this station lit. -->
+    <path android:strokeColor="#16A8E0" android:strokeWidth="5" android:strokeLineCap="round" android:pathData="M26,54H42" />
+    <path android:strokeColor="#16A8E0" android:strokeAlpha="0.32" android:strokeWidth="5" android:strokeLineCap="round" android:pathData="M66,54H82" />
+    <path android:strokeColor="#16A8E0" android:strokeWidth="6.5" android:pathData="M54,41a13,13 0 1,1 -0.01,0z" />
+    <path android:fillColor="#F3F5F9" android:pathData="M54,48.5a5.5,5.5 0 1,1 -0.01,0z" />
+    <path android:strokeColor="#16A8E0" android:strokeAlpha="0.4" android:strokeWidth="1.6" android:pathData="M54,33a21,21 0 1,1 -0.01,0z" />
+</vector>

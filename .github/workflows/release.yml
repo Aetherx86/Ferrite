@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.0.0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    name: Signed APK and web build
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
+      - name: The tag matches the version
+        run: |
+          version=$(grep '^ferrite.versionName=' gradle.properties | cut -d= -f2)
+          test "$GITHUB_REF_NAME" = "v$version"
+      - name: Tests
+        run: ./gradlew :shared:testAndroidHostTest --console=plain
+      - name: Restore the signing key, if this repository has one
+        env:
+          KEYSTORE_BASE64: ${{ secrets.FERRITE_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "FERRITE_KEYSTORE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+          fi
+      - name: Build
+        env:
+          FERRITE_KEYSTORE_PASSWORD: ${{ secrets.FERRITE_KEYSTORE_PASSWORD }}
+          FERRITE_KEY_ALIAS: ${{ secrets.FERRITE_KEY_ALIAS }}
+          FERRITE_KEY_PASSWORD: ${{ secrets.FERRITE_KEY_PASSWORD }}
+        run: ./gradlew :androidApp:assembleRelease :shared:wasmJsBrowserDistribution --console=plain
+      - name: Package
+        run: |
+          mkdir dist
+          # An APK signed with a throwaway key could not be updated later, so only a properly signed one goes out here.
+          if [ -n "${FERRITE_KEYSTORE:-}" ]; then
+            cp androidApp/build/outputs/apk/release/androidApp-release.apk "dist/Ferrite-$GITHUB_REF_NAME.apk"
+          fi
+          tar -czf "dist/Ferrite-web-$GITHUB_REF_NAME.tar.gz" -C shared/build/dist/wasmJs/productionExecutable .
+          (cd dist && sha256sum * > SHA256SUMS)
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4
+        with:
+          subject-path: "dist/Ferrite-*"
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          awk -v tag="${GITHUB_REF_NAME#v}" '$0 ~ "^## " tag {found=1; next} /^## / && found {exit} found' CHANGELOG.md > notes.md
+          gh release create "$GITHUB_REF_NAME" dist/* --title "Ferrite $GITHUB_REF_NAME" --notes-file notes.md --latest

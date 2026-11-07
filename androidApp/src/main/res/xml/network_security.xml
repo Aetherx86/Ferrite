@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Everything uses TLS except the two public feeds that only answer over plain HTTP. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">swopenapi.seoul.go.kr</domain>
+        <domain includeSubdomains="false">ws.bus.go.kr</domain>
+    </domain-config>
+</network-security-config>

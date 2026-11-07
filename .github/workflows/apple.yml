@@ -1,0 +1,30 @@
+name: Apple
+
+# Apple runners can wait in a long queue, so this runs apart from the main checks.
+on:
+  push:
+    tags:
+      - "v*.0.0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ios:
+    name: iOS simulator build
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
+      - name: Build
+        run: |
+          xcodebuild -project iosApp/iosApp.xcodeproj -target iosApp -configuration Debug \
+            -sdk iphonesimulator -arch arm64 CODE_SIGNING_ALLOWED=NO SYMROOT="$RUNNER_TEMP/build"
