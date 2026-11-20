@@ -46,7 +46,9 @@ import dev.aetherx86.ferrite.data.Line
 import dev.aetherx86.ferrite.data.Station
 import dev.aetherx86.ferrite.platform.LocalHost
 import dev.aetherx86.ferrite.route.Leg
+import dev.aetherx86.ferrite.route.RouteOptions
 import dev.aetherx86.ferrite.route.RoutePlanner
+import dev.aetherx86.ferrite.route.TransferPace
 import dev.aetherx86.ferrite.route.Trip
 import dev.aetherx86.ferrite.ui.common.AppIcon
 import dev.aetherx86.ferrite.ui.common.Chip
@@ -113,10 +115,12 @@ private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (St
     var editing by remember(initialFrom, initialTo) { mutableStateOf<Int?>(null) }
     var query by remember { mutableStateOf("") }
     val planner = remember(network) { RoutePlanner(network) }
-    val options = remember(from, to) {
+    val pace = services.settings.transferPace
+    // Waits depend on how often each line runs at the hour you travel, so the search starts from now.
+    val options = remember(from, to, pace) {
         val a = from
         val b = to
-        if (a == null || b == null) emptyList() else planner.options(a, b)
+        if (a == null || b == null) emptyList() else planner.journeys(a, b, RouteOptions(departAtMs = nowMillis(), pace = pace))
     }
     var choice by remember(options) { mutableStateOf(0) }
     var tracking by remember(options) { mutableStateOf<Long?>(null) }
@@ -169,13 +173,23 @@ private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (St
             return@Column
         }
         Spacer(Modifier.height(8.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            options.forEachIndexed { index, (preference, _) -> Chip(preference.label, index == choice, { choice = index }) }
+        Row(Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            options.forEachIndexed { index, journey -> Chip(journey.label, index == choice, { choice = index }) }
+            Spacer(Modifier.width(6.dp))
+            TransferPace.entries.forEach { option ->
+                Chip(option.label, option == pace, { services.settings.updateTransferPace(option) })
+            }
         }
-        val trip = options[choice.coerceIn(0, options.lastIndex)].second
+        val trip = options[choice.coerceIn(0, options.lastIndex)].trip
         Spacer(Modifier.height(8.dp))
         LazyColumn(Modifier.weight(1f)) {
             item { TripSummary(trip) }
+            if (trip.outsideServiceHours) {
+                item {
+                    Spacer(Modifier.height(8.dp))
+                    NoticeCard("열차가 다니지 않을 수 있습니다", "출발이나 환승 시각이 평소 운행 시간 밖입니다. 첫차와 막차 시각을 확인해 주세요.")
+                }
+            }
             item { Spacer(Modifier.height(8.dp)) }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -195,7 +209,7 @@ private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (St
                         Row(Modifier.padding(start = 22.dp, top = 6.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                             AppIcon(Icon.WALK, Palette.TextDim, size = 16.dp)
                             Spacer(Modifier.width(6.dp))
-                            Label("${transfer.toLine.name}(으)로 환승, 걷는 시간 ${formatDuration(transfer.seconds)}", size = 13.sp, color = Palette.TextSoft, maxLines = 2)
+                            Label("${transfer.toLine.name}(으)로 환승, 걷는 시간 ${formatDuration(transfer.seconds)}, 기다림 약 ${formatDuration(transfer.waitSeconds)}", size = 13.sp, color = Palette.TextSoft, maxLines = 2)
                         }
                     }
                 }
@@ -343,7 +357,7 @@ private fun TripTracker(trip: Trip, startedAt: Long) {
                 cursor += leg.seconds
                 val elapsed = ((now - startedAt) / 1000).toInt()
                 if (elapsed >= cursor - WARN_SECONDS && played.add(index)) host.play(BoardSound.APPROACH)
-                cursor += trip.transfers.getOrNull(index)?.seconds ?: 0
+                cursor += trip.transfers.getOrNull(index)?.let { it.seconds + it.waitSeconds } ?: 0
             }
             delay(1000)
         }
@@ -358,7 +372,7 @@ private fun TripTracker(trip: Trip, startedAt: Long) {
             message = "${leg.to.name}에서 내립니다 · 약 ${formatDuration(remain)} 후"
             break
         }
-        cursor = end + (trip.transfers.getOrNull(index)?.seconds ?: 0)
+        cursor = end + (trip.transfers.getOrNull(index)?.let { it.seconds + it.waitSeconds } ?: 0)
         if (elapsed < cursor) {
             message = "${trip.transfers[index].toLine.name}(으)로 갈아타는 중"
             break

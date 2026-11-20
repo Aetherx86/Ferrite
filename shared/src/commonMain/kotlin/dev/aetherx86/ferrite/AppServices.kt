@@ -9,6 +9,7 @@ import dev.aetherx86.ferrite.data.CongestionTable
 import dev.aetherx86.ferrite.data.GeoMapData
 import dev.aetherx86.ferrite.data.TransitNetwork
 import dev.aetherx86.ferrite.platform.KeyValueStore
+import dev.aetherx86.ferrite.route.TransferPace
 
 /** Settings and saved places. Keys for public data stay on the device and go only to the service they are for. */
 class AppSettings(private val store: KeyValueStore) {
@@ -17,6 +18,9 @@ class AppSettings(private val store: KeyValueStore) {
     var dataKey by mutableStateOf(store.getString(DATA_KEY).orEmpty())
         private set
     var soundOn by mutableStateOf(store.getString(SOUND) != "off")
+        private set
+    /** How much time rail trips allow for changing trains. */
+    var transferPace by mutableStateOf(TransferPace.entries.firstOrNull { it.name == store.getString(PACE) } ?: TransferPace.NORMAL)
         private set
     private var demoStored by mutableStateOf(store.getString(DEMO) == "on")
     private var demoSession by mutableStateOf(false)
@@ -42,6 +46,11 @@ class AppSettings(private val store: KeyValueStore) {
     fun updateSound(on: Boolean) {
         soundOn = on
         store.putString(SOUND, if (on) "on" else "off")
+    }
+
+    fun updateTransferPace(pace: TransferPace) {
+        transferPace = pace
+        store.putString(PACE, if (pace == TransferPace.NORMAL) null else pace.name)
     }
 
     fun updateDemo(on: Boolean) {
@@ -72,6 +81,7 @@ class AppSettings(private val store: KeyValueStore) {
         const val DATA_KEY = "key.data"
         const val SOUND = "sound"
         const val DEMO = "demo"
+        const val PACE = "transfer.pace"
         const val FAVORITES = "favorites"
         const val RECENTS = "recents"
         const val MAX_RECENTS = 8

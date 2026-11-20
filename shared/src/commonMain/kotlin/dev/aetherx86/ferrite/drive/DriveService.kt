@@ -127,6 +127,7 @@ object DriveService {
         val summary = trip.getValue("summary").jsonObject
         val legs = trip.getValue("legs").jsonArray.map { it.jsonObject }
         val points = legs.flatMap { WalkService.decodeShape(it.getValue("shape").jsonPrimitive.content) }
+        if (points.isEmpty()) throw RuntimeException("경로 모양 없음")
         var offset = 0
         val steps = ArrayList<WalkStep>()
         for (leg in legs) {
@@ -136,7 +137,7 @@ object DriveService {
                 val instruction = m["instruction"]?.jsonPrimitive?.content.orEmpty()
                 val meters = (m["length"]?.jsonPrimitive?.double ?: 0.0) * 1000
                 val kind = WalkService.kindOf(m.getValue("type").jsonPrimitive.int, instruction)
-                val at = shape.getOrElse(m["begin_shape_index"]?.jsonPrimitive?.int ?: 0) { shape.first() }
+                val at = shape.getOrNull(m["begin_shape_index"]?.jsonPrimitive?.int ?: 0) ?: shape.lastOrNull() ?: points.last()
                 val label = if (meters >= 1000) "$instruction · ${(meters / 100).toInt() / 10.0}km" else if (meters >= 1) "$instruction · ${meters.toInt()}m" else instruction
                 steps += WalkStep(kind, label, meters, at)
             }

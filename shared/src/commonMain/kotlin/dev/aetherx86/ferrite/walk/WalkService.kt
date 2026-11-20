@@ -1,6 +1,7 @@
 package dev.aetherx86.ferrite.walk
 
 import dev.aetherx86.ferrite.core.LatLng
+import dev.aetherx86.ferrite.core.Polyline
 import dev.aetherx86.ferrite.platform.httpRequest
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -79,6 +80,7 @@ object WalkService {
         val summary = trip.getValue("summary").jsonObject
         val leg = trip.getValue("legs").jsonArray[0].jsonObject
         val points = decodeShape(leg.getValue("shape").jsonPrimitive.content)
+        if (points.isEmpty()) throw RuntimeException("경로 모양 없음")
         var stairs = 0
         var crossings = 0
         val steps = leg.getValue("maneuvers").jsonArray.map { element ->
@@ -86,7 +88,7 @@ object WalkService {
             val type = maneuver.getValue("type").jsonPrimitive.int
             val text0 = maneuver["instruction"]?.jsonPrimitive?.content.orEmpty()
             val meters = (maneuver["length"]?.jsonPrimitive?.double ?: 0.0) * 1000
-            val at = points.getOrElse(maneuver["begin_shape_index"]?.jsonPrimitive?.int ?: 0) { points.first() }
+            val at = points.getOrElse(maneuver["begin_shape_index"]?.jsonPrimitive?.int ?: 0) { points.last() }
             val kind = kindOf(type, text0)
             if (kind == StepKind.STAIRS) stairs++
             if (kind == StepKind.CROSSING || "횡단보도" in text0) crossings++
@@ -126,29 +128,7 @@ object WalkService {
     }
 
     /** The service sends the line as an encoded string with six decimal places. */
-    fun decodeShape(shape: String): List<LatLng> {
-        val out = ArrayList<LatLng>()
-        var index = 0
-        var lat = 0L
-        var lon = 0L
-        fun next(): Long {
-            var result = 0L
-            var shift = 0
-            while (true) {
-                val b = shape[index++].code - 63
-                result = result or ((b and 0x1F).toLong() shl shift)
-                shift += 5
-                if (b < 0x20) break
-            }
-            return if (result and 1L != 0L) (result shr 1).inv() else result shr 1
-        }
-        while (index < shape.length) {
-            lat += next()
-            lon += next()
-            out += LatLng(lat / 1e6, lon / 1e6)
-        }
-        return out
-    }
+    fun decodeShape(shape: String): List<LatLng> = Polyline.decode(shape, 6)
 
     internal fun percentEncode(text: String): String = buildString {
         for (byte in text.encodeToByteArray()) {

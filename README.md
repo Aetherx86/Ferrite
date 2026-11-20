@@ -31,7 +31,7 @@ Next trains, network maps, trip planning, walking directions, an airport flight 
 | 역 전광판 | 남은 시간을 크게 보여 주고, 움직이는 열차와 칸별 혼잡도를 함께 표시합니다. 열차가 도착하면 노선 색이 이 역 표시에서 퍼져 화면을 채우고, 접근음, 도착 벨, 문 닫힘 경고음이 납니다. 가로와 세로 화면을 모두 지원합니다. |
 | 노선도 | 수도권, 부산, 대구, 대전, 광주 943개 역의 직선 노선도입니다. 확대할수록 역 이름이 겹치지 않는 선에서 더 나타납니다. 노선을 고르면 그 노선만 강조합니다. |
 | 지도 | 시도와 시군구 경계, 실제 선로 모양에서 거리, 건물, 강, 공원, 한글 지명까지 앱이 직접 그리는 벡터 지도입니다. |
-| 길찾기 | 최단 시간과 최소 환승 경로를 인터넷 없이 찾습니다. 운영기관이 측정한 환승 거리와 수도권 거리 비례 요금을 반영합니다. 하차 알림과 경로 공유를 지원합니다. |
+| 길찾기 | 가장 빠른 경로와, 몇 분 더 걸리는 대신 환승이 적은 경로들을 인터넷 없이 찾습니다. 운영기관이 측정한 환승 거리, 시간대별 배차 간격에 따른 대기 시간, 수도권 거리 비례 요금을 반영합니다. 여유 있게 환승하는 걸음 설정, 하차 알림과 경로 공유를 지원합니다. |
 | 걷기 | 가장 빠른 길, 계단 없는 길, 밝은 큰길을 비교합니다. 계단과 횡단보도 수, 턴별 안내, 가까운 역 출구 번호를 보여 줍니다. |
 | 운전 | 승용차, 경차, 전기차, 트럭(높이와 무게 제한), 이륜차, 자전거별 경로를 찾습니다. 통행료 회피, 도착지 주변 주차장으로 바로 안내, 같은 길의 택시 예상 요금을 지원합니다. |
 | 전기차 | 도착 시 배터리 잔량을 추정하고, 모자라면 경로 근처 충전소를 경유지로 넣습니다. |
@@ -117,7 +117,7 @@ Xcode가 JDK를 찾지 못하면 빌드 전에 `JAVA_HOME`을 Xcode 스킴의 �
 | Platform board | The wait in large type, with trains moving along the line and a load estimate for each car. When a train arrives, the line's color spreads from this station's marker across the page, with an approach chime, arrival bell and door warning. Works in both orientations. |
 | Network maps | Octilinear maps of 943 stations in the capital area, Busan, Daegu, Daejeon and Gwangju. Station names appear as you zoom, only when they have room. Picking a line highlights it. |
 | Map | A vector map the app draws itself, from province borders and real track shapes down to streets, buildings, rivers, parks and Korean place names. |
-| Trip planning | Fastest and fewest-change routes, computed on the device with no connection. Uses the operator's measured transfer walks and the capital area's distance fares. Includes a get-off alert and sharing. |
+| Trip planning | The quickest trip, and the trips that take a few minutes longer with fewer changes, computed on the device with no connection. Uses the operator's measured transfer walks, waits that follow each line's interval at the hour you travel, and the capital area's distance fares. Includes a relaxed transfer pace, a get-off alert and sharing. |
 | Walking | Compares the fastest, step-free and well-lit routes. Shows stairs and crossings, turn-by-turn directions, and the nearest station exit. |
 | Driving | Routes by vehicle: car, light car, electric car, truck with height and weight limits, motorbike and bicycle. Avoids tolls on request, goes straight to a car park near the destination, and estimates the taxi fare for the same trip. |
 | Electric cars | Estimates the battery on arrival, and adds a charger near the route as a stop when it would run short. |
@@ -184,6 +184,24 @@ If Xcode cannot find a JDK, set `JAVA_HOME` in the scheme's environment or in `~
 ```
 
 The output in `shared/build/dist/wasmJs/productionExecutable` can go on any static host. Adding `?station=삼각지&line=S4`, `?tab=map` or `?walkFrom=왕십리&walkTo=뚝섬`, `?driveFrom=왕십리&driveTo=강남` or `?trip=서울역,강남,잠실` opens that screen directly.
+
+## New in 0.3.0
+
+**Trips that trade time for changes.** The rail planner returns every trip that no other trip beats on both time and number of changes, quickest first, and the screen offers each as a choice (최단 시간, 환승 1회, 환승 없음). The search works in rounds: round k finds the quickest way to every platform with exactly k changes, starting from where the round before stopped, and keeps only what beats every earlier round. Trips that take more than 20 minutes, or half as long again, beyond the quickest are not offered. The single best trip for a preference (`RoutePlanner.plan`) and its options (`RoutePlanner.options`) work as before.
+
+**Waits that depend on the hour.** A change costs the measured walk between platforms plus the expected wait for the next train, which is half that line's usual interval at that time and day. Changing onto line 6 at 08:07 on a weekday costs a 2.5 minute wait, and at noon a 4 minute wait. A trip that starts or changes outside the usual 05:30 to 00:30 service is flagged.
+
+**A relaxed transfer pace.** The `여유 있게 환승` choice next to the trip options allows half as long again for each walk between platforms, plus a minute, for slower walking, prams or luggage. It is remembered on the device.
+
+**Data that cannot crash the app.** The rail network is checked as it loads, and anything that cannot be right is left out and listed in `TransitNetwork.issues` instead of stopping the app. Shapes from the walking, driving and world transit services go through one decoder (`Polyline`) that keeps every complete point of a damaged or cut-short shape.
+
+The tests for all of this, including a comparison of the round-based search with an exhaustive search over every path on hundreds of random networks, run with:
+
+```bash
+./gradlew --no-daemon :shared:testAndroidHostTest
+```
+
+The web edition builds with `./gradlew --no-daemon :shared:wasmJsBrowserDistribution`, into `shared/build/dist/wasmJs/productionExecutable`.
 
 ## How it is built
 

@@ -4,6 +4,8 @@ import dev.aetherx86.ferrite.data.CongestionTable
 import dev.aetherx86.ferrite.data.GeoMapData
 import dev.aetherx86.ferrite.data.TransitNetwork
 import dev.aetherx86.ferrite.live.BoardPath
+import dev.aetherx86.ferrite.core.epochOfKst
+import dev.aetherx86.ferrite.route.RouteOptions
 import dev.aetherx86.ferrite.route.RoutePlanner
 import dev.aetherx86.ferrite.route.TripPreference
 import java.io.File
@@ -74,6 +76,35 @@ class RealDataTest {
         assertTrue(far.seconds in 2 * 3600..5 * 3600, "${far.seconds}")
         val busan = planner.plan(network.stations.first { it.name == "서면" }, network.stations.first { it.name == "해운대" }, TripPreference.FASTEST)!!
         assertEquals(null, busan.fare)
+    }
+
+    @Test
+    fun theShippedNetworkLoadsWithNothingLeftOut() = load { network ->
+        assertEquals(emptyList(), network.issues)
+        assertEquals(943, network.stations.size)
+    }
+
+    @Test
+    fun realTripsOfferATradeBetweenTimeAndChanges() = load { network ->
+        val planner = RoutePlanner(network)
+        val from = network.named("삼각지")!!
+        val to = network.named("강남")!!
+        val front = planner.pareto(from, to)
+        assertTrue(front.isNotEmpty())
+        assertEquals(planner.plan(from, to, TripPreference.FASTEST)!!.seconds, front.first().seconds)
+        assertTrue(front.zipWithNext().all { (a, b) -> a.seconds < b.seconds && a.transferCount > b.transferCount })
+        val journeys = planner.journeys(from, to, RouteOptions(departAtMs = epochOfKst(2026, 11, 3, 8, 0, 0)))
+        assertTrue(journeys.first().fastest)
+        assertTrue(journeys.any { it.fewestTransfers })
+        // Across the whole capital area, the quickest of the set always matches the single best plan.
+        val stations = network.stations.filter { it.region == "capital" }
+        for (i in 0 until 40) {
+            val a = stations[(i * 37) % stations.size]
+            val b = stations[(i * 101 + 13) % stations.size]
+            if (a.id == b.id) continue
+            val best = planner.plan(a, b, TripPreference.FASTEST) ?: continue
+            assertEquals(best.seconds, planner.pareto(a, b, RouteOptions(maxTransfers = 8)).first().seconds, "${a.name} to ${b.name}")
+        }
     }
 
     @Test

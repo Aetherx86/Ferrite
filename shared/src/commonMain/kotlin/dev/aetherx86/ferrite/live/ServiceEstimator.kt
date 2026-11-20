@@ -10,8 +10,9 @@ import dev.aetherx86.ferrite.core.kstOf
  * numbers come from typical service intervals, and a real train could be anywhere.
  */
 object ServiceEstimator {
-    private const val FIRST_MINUTE = 5 * 60 + 30
-    private const val LAST_MINUTE = 24 * 60 + 30
+    /** The usual first and last departures of the service day, in minutes since its midnight. */
+    const val FIRST_MINUTE = 5 * 60 + 30
+    const val LAST_MINUTE = 24 * 60 + 30
 
     /** Peak, off-peak and weekend intervals in minutes. */
     private val INTERVALS = mapOf(

@@ -1,6 +1,7 @@
 package dev.aetherx86.ferrite.transit
 
 import dev.aetherx86.ferrite.core.LatLng
+import dev.aetherx86.ferrite.core.Polyline
 import dev.aetherx86.ferrite.platform.httpRequest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -84,13 +85,20 @@ object WorldTransit {
         return parse(result.body)
     }
 
+    /**
+     * Itineraries from the service's answer. One with a time that cannot be read is left out rather than failing the
+     * whole answer, and a leg whose shape is damaged keeps the part that could be read.
+     */
     fun parse(text: String): List<WorldTrip> =
-        json.decodeFromString(PlanDto.serializer(), text).itineraries.map { it ->
+        json.decodeFromString(PlanDto.serializer(), text).itineraries.mapNotNull { it ->
+            val startMs = runCatching { Instant.parse(it.startTime).toEpochMilliseconds() }.getOrNull() ?: return@mapNotNull null
+            val endMs = runCatching { Instant.parse(it.endTime).toEpochMilliseconds() }.getOrNull() ?: return@mapNotNull null
+            if (endMs < startMs) return@mapNotNull null
             WorldTrip(
-                startMs = Instant.parse(it.startTime).toEpochMilliseconds(),
-                endMs = Instant.parse(it.endTime).toEpochMilliseconds(),
-                seconds = it.duration,
-                transfers = it.transfers,
+                startMs = startMs,
+                endMs = endMs,
+                seconds = it.duration.coerceAtLeast(0),
+                transfers = it.transfers.coerceAtLeast(0),
                 legs = it.legs.map { leg ->
                     WorldLeg(
                         mode = leg.mode,
@@ -98,8 +106,8 @@ object WorldTransit {
                         headsign = leg.headsign,
                         from = leg.from.name,
                         to = leg.to.name,
-                        seconds = leg.duration,
-                        colorHex = leg.routeColor?.takeIf { c -> c.length == 6 },
+                        seconds = leg.duration.coerceAtLeast(0),
+                        colorHex = leg.routeColor?.takeIf { c -> c.length == 6 && c.all { ch -> ch.isHexDigit() } },
                         live = leg.realTime,
                         stops = leg.intermediateStops.size + 1,
                         points = decode(leg.legGeometry.points, leg.legGeometry.precision),
@@ -108,29 +116,7 @@ object WorldTransit {
             )
         }
 
-    fun decode(shape: String, precision: Int): List<LatLng> {
-        var factor = 1.0
-        repeat(precision) { factor *= 10.0 }
-        val out = ArrayList<LatLng>()
-        var i = 0
-        var lat = 0L
-        var lon = 0L
-        fun next(): Long {
-            var result = 0L
-            var shift = 0
-            while (true) {
-                val b = shape[i++].code - 63
-                result = result or ((b and 0x1F).toLong() shl shift)
-                shift += 5
-                if (b < 0x20) break
-            }
-            return if (result and 1L != 0L) (result shr 1).inv() else result shr 1
-        }
-        while (i < shape.length) {
-            lat += next()
-            lon += next()
-            out += LatLng(lat / factor, lon / factor)
-        }
-        return out
-    }
+    fun decode(shape: String, precision: Int): List<LatLng> = Polyline.decode(shape, precision)
+
+    private fun Char.isHexDigit(): Boolean = this in '0'..'9' || this in 'a'..'f' || this in 'A'..'F'
 }

@@ -12,3 +12,5 @@ xcuserdata/
 kotlin-js-store/
 # cogit
 /.cogit/
+__pycache__/
+*.pyc

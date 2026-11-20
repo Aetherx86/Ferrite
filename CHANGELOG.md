@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0] - 2026-11-21
+
+- Rail trips come as a set: the quickest, and each trip that saves a change for a few more minutes. None of the trips offered is beaten on both time and changes by another. The search runs in rounds, one per change, and an automated test checks it against an exhaustive search over every path on hundreds of random networks. Trips that take much longer than the quickest (more than 20 minutes or half as long again, whichever is more) are not offered.
+- The wait at a change follows how often the next line runs at that hour and day, as half its usual interval, instead of a flat three minutes. Each change shows its walk and its wait, and the get-off alert counts both. A trip that starts or changes outside the usual 05:30 to 00:30 service is flagged on screen.
+- A relaxed transfer pace for slower walking, prams or luggage: walks between platforms are allowed half as long again, plus a minute. The choice is remembered on the device.
+- The rail network is checked as it loads. A hop between unknown stations, an impossible run time, a station off the Earth, a repeated id or a colour that cannot be read is left out or replaced and listed, so damaged data gives a smaller network instead of a crash. The shipped data passes with nothing left out.
+- Route shapes from walking, driving and world transit services are read by one shared decoder that keeps every complete point of a damaged or cut-short shape instead of crashing. A world transit itinerary with an unreadable time is left out rather than failing the whole answer, and a walking or driving answer with no shape fails with a clear message.
+- Line colours also accept the short `#RGB` form.
+
 ## 0.2.0
 
 - Driving directions by vehicle: car, light car, electric car, truck with height and weight limits, motorbike and bicycle, with an option to avoid tolls.

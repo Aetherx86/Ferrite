@@ -61,5 +61,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          awk -v tag="${GITHUB_REF_NAME#v}" '$0 ~ "^## " tag {found=1; next} /^## / && found {exit} found' CHANGELOG.md > notes.md
+          awk -v tag="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[?" tag {found=1; next} /^## / && found {exit} found' CHANGELOG.md > notes.md
           gh release create "$GITHUB_REF_NAME" dist/* --title "Ferrite $GITHUB_REF_NAME" --notes-file notes.md --latest
