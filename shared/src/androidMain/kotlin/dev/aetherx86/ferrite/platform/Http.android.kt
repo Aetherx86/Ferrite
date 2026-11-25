@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.platform
+package dev.omakasekim.ferrite.platform
 
 import java.net.HttpURLConnection
 import java.net.URL

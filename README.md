@@ -1,6 +1,6 @@
 # Ferrite
 
-**[Try it in your browser](https://aetherx86.github.io/ferrite/) · [Download the Android APK](https://github.com/Aetherx86/Ferrite/releases/latest)**
+**[Try it in your browser](https://omakasekim.github.io/ferrite/) · [Download the Android APK](https://github.com/omakasekim/Ferrite/releases/latest)**
 
 전국 도시철도의 다음 열차, 노선도, 길찾기, 걷기, 공항 전광판, 버스 도착을 한 앱에 담았습니다. Kotlin Multiplatform으로 만들었고 Android, iOS, 웹이 같은 코드로 돌아갑니다.
 
@@ -68,7 +68,7 @@ Next trains, network maps, trip planning, walking directions, an airport flight 
 
 ### Android 설치
 
-[최신 릴리스](https://github.com/Aetherx86/Ferrite/releases/latest)에서 `Ferrite-버전.apk`를 받아 설치합니다. Android 8.0 이상이 필요합니다. 처음이면 출처를 알 수 없는 앱 설치를 허용해야 합니다. 함께 올라가는 `.sha256` 파일로 내려받은 파일을 검증할 수 있습니다.
+[최신 릴리스](https://github.com/omakasekim/Ferrite/releases/latest)에서 `Ferrite-버전.apk`를 받아 설치합니다. Android 8.0 이상이 필요합니다. 처음이면 출처를 알 수 없는 앱 설치를 허용해야 합니다. 함께 올라가는 `.sha256` 파일로 내려받은 파일을 검증할 수 있습니다.
 
 ### Android 에뮬레이터에서 직접 빌드
 
@@ -84,7 +84,7 @@ iOS는 패키지를 배포하지 않습니다. 이 저장소의 파일로 직접
 
 1. Mac에 Xcode와 JDK 21 이상을 설치합니다.
 2. `iosApp/iosApp.xcodeproj`를 Xcode로 엽니다.
-3. Signing & Capabilities에서 본인의 Team을 고릅니다. 다른 사람이 쓰던 번들 ID와 겹치면 `dev.aetherx86.ferrite`를 본인 것으로 바꿉니다.
+3. Signing & Capabilities에서 본인의 Team을 고릅니다. 다른 사람이 쓰던 번들 ID와 겹치면 `dev.omakasekim.ferrite`를 본인 것으로 바꿉니다.
 4. 실행 대상으로 기기나 시뮬레이터를 고르고 Run을 누릅니다. 첫 빌드는 공용 코드를 컴파일하느라 몇 분 걸립니다.
 
 App Store나 TestFlight로 배포하려면 Apple Developer Program에 가입한 뒤 Xcode에서 Product, Archive, Distribute App 순서로 진행합니다. 위치 권한 문구와 평문 HTTP 예외는 `iosApp/iosApp/Info.plist`에 있으며, 예외는 HTTP만 지원하는 공공 서비스 두 곳으로 한정했습니다. 심사 때 이 사유를 적어 주세요.
@@ -154,7 +154,7 @@ For buses, apply for the Seoul bus and national transit center services separate
 
 ### Install on Android
 
-Get `Ferrite-version.apk` from the [latest release](https://github.com/Aetherx86/Ferrite/releases/latest). It needs Android 8.0 or later, and you may have to allow installs from unknown sources. The `.sha256` file in the same release verifies it.
+Get `Ferrite-version.apk` from the [latest release](https://github.com/omakasekim/Ferrite/releases/latest). It needs Android 8.0 or later, and you may have to allow installs from unknown sources. The `.sha256` file in the same release verifies it.
 
 ### Build for Android or an emulator
 
@@ -170,7 +170,7 @@ There is no prebuilt iOS package. You build it from these files.
 
 1. Install Xcode and JDK 21 or later on a Mac.
 2. Open `iosApp/iosApp.xcodeproj` in Xcode.
-3. Under Signing & Capabilities, pick your team. If the bundle ID is taken, change `dev.aetherx86.ferrite` to your own.
+3. Under Signing & Capabilities, pick your team. If the bundle ID is taken, change `dev.omakasekim.ferrite` to your own.
 4. Choose a device or simulator and press Run. The first build takes a few minutes to compile the shared code.
 
 To distribute through the App Store or TestFlight, join the Apple Developer Program, then use Product, Archive and Distribute App in Xcode. The location prompt and the plain HTTP exceptions are in `iosApp/iosApp/Info.plist`. The exceptions cover only the two public services that have no HTTPS, which is worth stating in App Review notes.

@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.airport
+package dev.omakasekim.ferrite.airport
 
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.two
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.two
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray

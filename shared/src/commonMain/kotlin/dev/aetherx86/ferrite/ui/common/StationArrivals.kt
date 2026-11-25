@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.common
+package dev.omakasekim.ferrite.ui.common
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,15 +18,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.live.SeoulArrivalDto
-import dev.aetherx86.ferrite.live.SeoulArrivals
-import dev.aetherx86.ferrite.live.ServiceEstimator
-import dev.aetherx86.ferrite.live.countdownParts
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.live.SeoulArrivalDto
+import dev.omakasekim.ferrite.live.SeoulArrivals
+import dev.omakasekim.ferrite.live.ServiceEstimator
+import dev.omakasekim.ferrite.live.countdownParts
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 

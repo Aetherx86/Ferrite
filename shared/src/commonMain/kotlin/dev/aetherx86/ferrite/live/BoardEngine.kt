@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
 import kotlin.math.ceil
 

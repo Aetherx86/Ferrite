@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.map
+package dev.omakasekim.ferrite.ui.map
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -48,28 +48,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.map.BaseMap
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.Chip
-import dev.aetherx86.ferrite.ui.common.GhostButton
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.IconButton
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.LineMark
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.PrimaryButton
-import dev.aetherx86.ferrite.ui.common.SearchField
-import dev.aetherx86.ferrite.ui.common.StationArrivals
-import dev.aetherx86.ferrite.ui.common.consumeTaps
-import dev.aetherx86.ferrite.ui.common.textStyle
-import dev.aetherx86.ferrite.ui.common.visibleOnDark
-import dev.aetherx86.ferrite.ui.home.StationRow
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.map.BaseMap
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.Chip
+import dev.omakasekim.ferrite.ui.common.GhostButton
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.IconButton
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.LineMark
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.PrimaryButton
+import dev.omakasekim.ferrite.ui.common.SearchField
+import dev.omakasekim.ferrite.ui.common.StationArrivals
+import dev.omakasekim.ferrite.ui.common.consumeTaps
+import dev.omakasekim.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.ui.common.visibleOnDark
+import dev.omakasekim.ferrite.ui.home.StationRow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -92,7 +92,7 @@ fun MapScreen(
     onWalkTo: (Station) -> Unit,
     focusStation: Station? = null,
     highlight: MapHighlight? = null,
-    around: dev.aetherx86.ferrite.ui.world.NamedSpot? = null,
+    around: dev.omakasekim.ferrite.ui.world.NamedSpot? = null,
 ) {
     val services = LocalServices.current
     val network = services.network
@@ -105,7 +105,7 @@ fun MapScreen(
 
     Box(Modifier.fillMaxSize().clipToBounds()) {
         if (region == AROUND) {
-            dev.aetherx86.ferrite.ui.world.AroundMap(around)
+            dev.omakasekim.ferrite.ui.world.AroundMap(around)
         } else if (region == COUNTRY) {
             CountryMap(selected, pendingFocus, { pendingFocus = null }) { selected = it }
         } else {

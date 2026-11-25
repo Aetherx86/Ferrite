@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.airport
+package dev.omakasekim.ferrite.ui.airport
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -36,23 +36,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.airport.Flight
-import dev.aetherx86.ferrite.airport.Flights
-import dev.aetherx86.ferrite.airport.Movement
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.core.two
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.ui.common.Chip
-import dev.aetherx86.ferrite.ui.common.GhostButton
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.NoticeCard
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.SearchField
-import dev.aetherx86.ferrite.ui.common.SourceTag
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.airport.Flight
+import dev.omakasekim.ferrite.airport.Flights
+import dev.omakasekim.ferrite.airport.Movement
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.core.two
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.ui.common.Chip
+import dev.omakasekim.ferrite.ui.common.GhostButton
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.NoticeCard
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.SearchField
+import dev.omakasekim.ferrite.ui.common.SourceTag
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 

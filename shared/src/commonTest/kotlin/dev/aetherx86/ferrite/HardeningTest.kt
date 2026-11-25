@@ -1,15 +1,15 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.Polyline
-import dev.aetherx86.ferrite.data.TransitNetwork
-import dev.aetherx86.ferrite.data.parseColor
-import dev.aetherx86.ferrite.data.parseColorOrNull
-import dev.aetherx86.ferrite.route.RoutePlanner
-import dev.aetherx86.ferrite.route.TripPreference
-import dev.aetherx86.ferrite.transit.WorldTransit
-import dev.aetherx86.ferrite.walk.WalkProfile
-import dev.aetherx86.ferrite.walk.WalkService
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.Polyline
+import dev.omakasekim.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.data.parseColor
+import dev.omakasekim.ferrite.data.parseColorOrNull
+import dev.omakasekim.ferrite.route.RoutePlanner
+import dev.omakasekim.ferrite.route.TripPreference
+import dev.omakasekim.ferrite.transit.WorldTransit
+import dev.omakasekim.ferrite.walk.WalkProfile
+import dev.omakasekim.ferrite.walk.WalkService
 import kotlin.math.abs
 import kotlin.random.Random
 import kotlin.test.Test

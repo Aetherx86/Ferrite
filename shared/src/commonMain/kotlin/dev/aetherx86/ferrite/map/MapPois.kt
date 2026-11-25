@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.map
+package dev.omakasekim.ferrite.map
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.platform.httpBytes
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.platform.httpBytes
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope

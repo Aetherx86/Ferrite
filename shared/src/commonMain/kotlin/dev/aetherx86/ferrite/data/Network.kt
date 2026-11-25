@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.data
+package dev.omakasekim.ferrite.data
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.core.searchScore
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.core.searchScore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 

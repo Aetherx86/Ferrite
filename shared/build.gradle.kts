@@ -10,7 +10,7 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "dev.aetherx86.ferrite.shared"
+        namespace = "dev.omakasekim.ferrite.shared"
         compileSdk { version = release(37) }
         minSdk = 26
         compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
@@ -60,6 +60,6 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "dev.aetherx86.ferrite.resources"
+    packageOfResClass = "dev.omakasekim.ferrite.resources"
     generateResClass = always
 }

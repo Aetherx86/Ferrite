@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.platform
+package dev.omakasekim.ferrite.platform
 
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.audio.SoundSynth
-import dev.aetherx86.ferrite.core.LatLng
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.audio.SoundSynth
+import dev.omakasekim.ferrite.core.LatLng
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.io.encoding.Base64

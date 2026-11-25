@@ -1,10 +1,10 @@
-package dev.aetherx86.ferrite.ui.map
+package dev.omakasekim.ferrite.ui.map
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.data.TransitNetwork
 import kotlin.math.atan2
 import kotlin.math.hypot
 import kotlin.math.max

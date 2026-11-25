@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui
+package dev.omakasekim.ferrite.ui
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -33,24 +33,24 @@ import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.StartRequest
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.ui.airport.AirportScreen
-import dev.aetherx86.ferrite.ui.board.BoardScreen
-import dev.aetherx86.ferrite.ui.bus.BusScreen
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.home.HomeScreen
-import dev.aetherx86.ferrite.ui.map.MapHighlight
-import dev.aetherx86.ferrite.ui.map.MapScreen
-import dev.aetherx86.ferrite.ui.route.RouteScreen
-import dev.aetherx86.ferrite.ui.settings.LicensesScreen
-import dev.aetherx86.ferrite.ui.settings.SettingsScreen
-import dev.aetherx86.ferrite.ui.world.NamedSpot
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.StartRequest
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.ui.airport.AirportScreen
+import dev.omakasekim.ferrite.ui.board.BoardScreen
+import dev.omakasekim.ferrite.ui.bus.BusScreen
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.home.HomeScreen
+import dev.omakasekim.ferrite.ui.map.MapHighlight
+import dev.omakasekim.ferrite.ui.map.MapScreen
+import dev.omakasekim.ferrite.ui.route.RouteScreen
+import dev.omakasekim.ferrite.ui.settings.LicensesScreen
+import dev.omakasekim.ferrite.ui.settings.SettingsScreen
+import dev.omakasekim.ferrite.ui.world.NamedSpot
 
 private enum class Tab(val label: String, val icon: Icon) {
     HOME("도착", Icon.TRAIN),

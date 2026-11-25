@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
-import dev.aetherx86.ferrite.core.epochOfKst
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.epochOfKst
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.core
+package dev.omakasekim.ferrite.core
 
 import kotlin.time.Clock
 

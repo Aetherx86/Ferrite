@@ -1,13 +1,13 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.data.CongestionTable
-import dev.aetherx86.ferrite.data.GeoMapData
-import dev.aetherx86.ferrite.data.TransitNetwork
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.core.epochOfKst
-import dev.aetherx86.ferrite.route.RouteOptions
-import dev.aetherx86.ferrite.route.RoutePlanner
-import dev.aetherx86.ferrite.route.TripPreference
+import dev.omakasekim.ferrite.data.CongestionTable
+import dev.omakasekim.ferrite.data.GeoMapData
+import dev.omakasekim.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.core.epochOfKst
+import dev.omakasekim.ferrite.route.RouteOptions
+import dev.omakasekim.ferrite.route.RoutePlanner
+import dev.omakasekim.ferrite.route.TripPreference
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.data.TransitNetwork
 
 /**
  * The stretch of line a platform board draws: a few stations behind this one, and those ahead.

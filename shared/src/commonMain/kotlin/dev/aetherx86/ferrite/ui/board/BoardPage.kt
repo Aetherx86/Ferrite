@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.board
+package dev.omakasekim.ferrite.ui.board
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -35,18 +35,18 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import dev.aetherx86.ferrite.core.KstTime
-import dev.aetherx86.ferrite.core.two
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.live.CarLoad
-import dev.aetherx86.ferrite.live.FeedSource
-import dev.aetherx86.ferrite.live.LoadLevel
-import dev.aetherx86.ferrite.ui.common.FitText
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.contrastOn
-import dev.aetherx86.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.core.KstTime
+import dev.omakasekim.ferrite.core.two
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.live.CarLoad
+import dev.omakasekim.ferrite.live.FeedSource
+import dev.omakasekim.ferrite.live.LoadLevel
+import dev.omakasekim.ferrite.ui.common.FitText
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.contrastOn
+import dev.omakasekim.ferrite.ui.common.textStyle
 
 @Composable
 fun BoardHeader(path: BoardPath, dims: BoardDims, scheme: BoardScheme, lineColor: Color, time: KstTime) {

@@ -1,8 +1,8 @@
 # Serialized data classes keep their generated serializers.
--keepclassmembers class dev.aetherx86.ferrite.** {
+-keepclassmembers class dev.omakasekim.ferrite.** {
     *** Companion;
 }
--keepclasseswithmembers class dev.aetherx86.ferrite.** {
+-keepclasseswithmembers class dev.omakasekim.ferrite.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
--keep,includedescriptorclasses class dev.aetherx86.ferrite.**$$serializer { *; }
+-keep,includedescriptorclasses class dev.omakasekim.ferrite.**$$serializer { *; }

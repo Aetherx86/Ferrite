@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.core
+package dev.omakasekim.ferrite.core
 
 import kotlin.math.abs
 import kotlin.math.roundToLong

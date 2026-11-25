@@ -4,7 +4,7 @@
 
 전국 도시철도의 다음 열차 도착 정보, 직관적인 노선도, 최적 길찾기, 걷기 경로, 공항 운항 전광판, 실시간 버스 도착 정보를 하나로 통합한 애플리케이션입니다. Kotlin Multiplatform 기반으로 구축되어 Android, iOS, 웹(WebAssembly)에서 동일한 단일 코드로 구동됩니다.
 
-[English Documentation](README.md) • [웹 브라우저에서 바로 체험하기](https://aetherx86.github.io/ferrite/) • [최신 Android APK 다운로드](https://github.com/Aetherx86/Ferrite/releases/latest)
+[English Documentation](README.md) • [웹 브라우저에서 바로 체험하기](https://omakasekim.github.io/ferrite/) • [최신 Android APK 다운로드](https://github.com/omakasekim/Ferrite/releases/latest)
 
 ## 핵심 기능
 

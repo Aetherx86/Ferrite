@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.platform
+package dev.omakasekim.ferrite.platform
 
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi

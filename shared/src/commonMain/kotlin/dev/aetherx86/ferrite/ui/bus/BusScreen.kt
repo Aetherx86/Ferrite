@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.bus
+package dev.omakasekim.ferrite.ui.bus
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,22 +23,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.bus.BusArrival
-import dev.aetherx86.ferrite.bus.BusFeed
-import dev.aetherx86.ferrite.bus.BusStop
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.isInKorea
-import dev.aetherx86.ferrite.live.countdownParts
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.IconButton
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.NoticeCard
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.Panel
-import dev.aetherx86.ferrite.ui.common.SourceTag
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.bus.BusArrival
+import dev.omakasekim.ferrite.bus.BusFeed
+import dev.omakasekim.ferrite.bus.BusStop
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.isInKorea
+import dev.omakasekim.ferrite.live.countdownParts
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.IconButton
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.NoticeCard
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.Panel
+import dev.omakasekim.ferrite.ui.common.SourceTag
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 

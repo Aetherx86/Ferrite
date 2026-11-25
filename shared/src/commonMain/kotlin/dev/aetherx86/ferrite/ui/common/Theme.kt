@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.common
+package dev.omakasekim.ferrite.ui.common
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -7,13 +7,13 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import dev.aetherx86.ferrite.resources.Res
-import dev.aetherx86.ferrite.resources.ferrite_mono_bold
-import dev.aetherx86.ferrite.resources.ferrite_mono_medium
-import dev.aetherx86.ferrite.resources.ferrite_sans_black
-import dev.aetherx86.ferrite.resources.ferrite_sans_bold
-import dev.aetherx86.ferrite.resources.ferrite_sans_medium
-import dev.aetherx86.ferrite.resources.ferrite_sans_regular
+import dev.omakasekim.ferrite.resources.Res
+import dev.omakasekim.ferrite.resources.ferrite_mono_bold
+import dev.omakasekim.ferrite.resources.ferrite_mono_medium
+import dev.omakasekim.ferrite.resources.ferrite_sans_black
+import dev.omakasekim.ferrite.resources.ferrite_sans_bold
+import dev.omakasekim.ferrite.resources.ferrite_sans_medium
+import dev.omakasekim.ferrite.resources.ferrite_sans_regular
 import org.jetbrains.compose.resources.Font
 
 object Palette {

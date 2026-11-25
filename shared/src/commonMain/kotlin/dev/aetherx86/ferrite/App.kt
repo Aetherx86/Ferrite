@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -8,16 +8,16 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
-import dev.aetherx86.ferrite.data.CongestionTable
-import dev.aetherx86.ferrite.data.GeoMapData
-import dev.aetherx86.ferrite.data.TransitNetwork
-import dev.aetherx86.ferrite.platform.Host
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.resources.Res
-import dev.aetherx86.ferrite.ui.AppRoot
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.rememberAppFonts
+import dev.omakasekim.ferrite.data.CongestionTable
+import dev.omakasekim.ferrite.data.GeoMapData
+import dev.omakasekim.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.platform.Host
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.resources.Res
+import dev.omakasekim.ferrite.ui.AppRoot
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.rememberAppFonts
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.route
+package dev.omakasekim.ferrite.ui.route
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -37,36 +37,36 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.core.two
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.route.Leg
-import dev.aetherx86.ferrite.route.RouteOptions
-import dev.aetherx86.ferrite.route.RoutePlanner
-import dev.aetherx86.ferrite.route.TransferPace
-import dev.aetherx86.ferrite.route.Trip
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.Chip
-import dev.aetherx86.ferrite.ui.common.GhostButton
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.IconButton
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.LineMark
-import dev.aetherx86.ferrite.ui.common.NoticeCard
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.Panel
-import dev.aetherx86.ferrite.ui.common.PrimaryButton
-import dev.aetherx86.ferrite.ui.common.SearchField
-import dev.aetherx86.ferrite.ui.common.visibleOnDark
-import dev.aetherx86.ferrite.ui.home.StationRow
-import dev.aetherx86.ferrite.ui.walk.WalkScreen
-import dev.aetherx86.ferrite.ui.world.NamedSpot
-import dev.aetherx86.ferrite.ui.world.WorldTransitScreen
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.core.two
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.route.Leg
+import dev.omakasekim.ferrite.route.RouteOptions
+import dev.omakasekim.ferrite.route.RoutePlanner
+import dev.omakasekim.ferrite.route.TransferPace
+import dev.omakasekim.ferrite.route.Trip
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.Chip
+import dev.omakasekim.ferrite.ui.common.GhostButton
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.IconButton
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.LineMark
+import dev.omakasekim.ferrite.ui.common.NoticeCard
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.Panel
+import dev.omakasekim.ferrite.ui.common.PrimaryButton
+import dev.omakasekim.ferrite.ui.common.SearchField
+import dev.omakasekim.ferrite.ui.common.visibleOnDark
+import dev.omakasekim.ferrite.ui.home.StationRow
+import dev.omakasekim.ferrite.ui.walk.WalkScreen
+import dev.omakasekim.ferrite.ui.world.NamedSpot
+import dev.omakasekim.ferrite.ui.world.WorldTransitScreen
 import kotlinx.coroutines.delay
 
 /** Going somewhere: by rail with changes and fares, or on foot. */
@@ -98,9 +98,9 @@ fun RouteScreen(
         when (mode) {
             0 -> RailPlanner(initialFrom, initialTo, onBoard, onShowOnMap)
             1 -> key(walkTo, walkFrom, fromSpot, toSpot) { WalkScreen(toStation = walkTo, fromStation = walkFrom, fromSpot = fromSpot, toSpot = toSpot) }
-            2 -> key(driveFrom, driveTo, fromSpot, toSpot) { dev.aetherx86.ferrite.ui.drive.DriveScreen(driveFrom, driveTo, fromSpot, toSpot) }
+            2 -> key(driveFrom, driveTo, fromSpot, toSpot) { dev.omakasekim.ferrite.ui.drive.DriveScreen(driveFrom, driveTo, fromSpot, toSpot) }
             4 -> key(fromSpot, toSpot) { WorldTransitScreen(fromSpot, toSpot) }
-            else -> dev.aetherx86.ferrite.ui.trip.TripScreen(tripStations)
+            else -> dev.omakasekim.ferrite.ui.trip.TripScreen(tripStations)
         }
     }
 }

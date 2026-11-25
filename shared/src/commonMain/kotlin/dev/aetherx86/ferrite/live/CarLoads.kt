@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
-import dev.aetherx86.ferrite.core.KstTime
-import dev.aetherx86.ferrite.data.CongestionTable
+import dev.omakasekim.ferrite.core.KstTime
+import dev.omakasekim.ferrite.data.CongestionTable
 import kotlin.math.abs
 import kotlin.math.exp
 

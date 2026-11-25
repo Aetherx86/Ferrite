@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.map
+package dev.omakasekim.ferrite.map
 
 /** One feature from a map tile: its shape in tile coordinates and the few tags the app uses. */
 class TileFeature(

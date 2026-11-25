@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.transit
+package dev.omakasekim.ferrite.transit
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.Polyline
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.Polyline
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.time.Instant

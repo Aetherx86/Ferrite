@@ -1,11 +1,11 @@
-package dev.aetherx86.ferrite.ui.board
+package dev.omakasekim.ferrite.ui.board
 
-import dev.aetherx86.ferrite.live.Approach
-import dev.aetherx86.ferrite.live.BoardFrame
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.live.FeedSource
-import dev.aetherx86.ferrite.live.Phase
-import dev.aetherx86.ferrite.live.countdownParts
+import dev.omakasekim.ferrite.live.Approach
+import dev.omakasekim.ferrite.live.BoardFrame
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.live.FeedSource
+import dev.omakasekim.ferrite.live.Phase
+import dev.omakasekim.ferrite.live.countdownParts
 
 /** Just the words and numbers on a board, so the page only recomposes when one of them changes. */
 data class BoardDisplay(

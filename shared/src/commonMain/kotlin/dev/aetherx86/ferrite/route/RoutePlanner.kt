@@ -1,9 +1,9 @@
-package dev.aetherx86.ferrite.route
+package dev.omakasekim.ferrite.route
 
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.data.TransitNetwork
 
 /** A ride on one line. */
 data class Leg(val line: Line, val stations: List<Station>, val seconds: Int) {

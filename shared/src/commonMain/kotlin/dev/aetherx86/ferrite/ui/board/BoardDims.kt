@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.board
+package dev.omakasekim.ferrite.ui.board
 
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp

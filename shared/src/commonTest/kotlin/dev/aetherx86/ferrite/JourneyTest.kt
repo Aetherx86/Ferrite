@@ -1,12 +1,12 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.core.epochOfKst
-import dev.aetherx86.ferrite.data.TransitNetwork
-import dev.aetherx86.ferrite.route.RouteOptions
-import dev.aetherx86.ferrite.route.RoutePlanner
-import dev.aetherx86.ferrite.route.TransferModel
-import dev.aetherx86.ferrite.route.TransferPace
-import dev.aetherx86.ferrite.route.TripPreference
+import dev.omakasekim.ferrite.core.epochOfKst
+import dev.omakasekim.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.route.RouteOptions
+import dev.omakasekim.ferrite.route.RoutePlanner
+import dev.omakasekim.ferrite.route.TransferModel
+import dev.omakasekim.ferrite.route.TransferPace
+import dev.omakasekim.ferrite.route.TripPreference
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals

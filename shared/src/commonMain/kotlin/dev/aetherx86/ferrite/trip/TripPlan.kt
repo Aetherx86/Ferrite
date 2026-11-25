@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite.trip
+package dev.omakasekim.ferrite.trip
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.platform.KeyValueStore
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.platform.KeyValueStore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.home
+package dev.omakasekim.ferrite.ui.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,22 +24,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.GhostButton
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.IconButton
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.LineMark
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.Panel
-import dev.aetherx86.ferrite.ui.common.SearchField
-import dev.aetherx86.ferrite.ui.common.SectionTitle
-import dev.aetherx86.ferrite.ui.common.StationArrivals
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.GhostButton
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.IconButton
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.LineMark
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.Panel
+import dev.omakasekim.ferrite.ui.common.SearchField
+import dev.omakasekim.ferrite.ui.common.SectionTitle
+import dev.omakasekim.ferrite.ui.common.StationArrivals
 import kotlinx.coroutines.launch
 
 private const val MAX_NEARBY_METERS = 40_000.0

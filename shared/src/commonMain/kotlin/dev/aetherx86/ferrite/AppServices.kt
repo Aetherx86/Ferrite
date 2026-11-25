@@ -1,15 +1,15 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
-import dev.aetherx86.ferrite.data.CongestionTable
-import dev.aetherx86.ferrite.data.GeoMapData
-import dev.aetherx86.ferrite.data.TransitNetwork
-import dev.aetherx86.ferrite.platform.KeyValueStore
-import dev.aetherx86.ferrite.route.TransferPace
+import dev.omakasekim.ferrite.data.CongestionTable
+import dev.omakasekim.ferrite.data.GeoMapData
+import dev.omakasekim.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.platform.KeyValueStore
+import dev.omakasekim.ferrite.route.TransferPace
 
 /** Settings and saved places. Keys for public data stay on the device and go only to the service they are for. */
 class AppSettings(private val store: KeyValueStore) {

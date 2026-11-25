@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
 import androidx.compose.ui.window.ComposeUIViewController
-import dev.aetherx86.ferrite.platform.IosHost
+import dev.omakasekim.ferrite.platform.IosHost
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController {

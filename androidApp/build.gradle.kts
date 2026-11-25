@@ -9,11 +9,11 @@ val versionNameProp = providers.gradleProperty("ferrite.versionName").get()
 val versionCodeProp = providers.gradleProperty("ferrite.versionCode").get().toInt()
 
 android {
-    namespace = "dev.aetherx86.ferrite.app"
+    namespace = "dev.omakasekim.ferrite.app"
     compileSdk { version = release(37) }
 
     defaultConfig {
-        applicationId = "dev.aetherx86.ferrite"
+        applicationId = "dev.omakasekim.ferrite"
         minSdk = 26
         targetSdk = 37
         versionCode = versionCodeProp

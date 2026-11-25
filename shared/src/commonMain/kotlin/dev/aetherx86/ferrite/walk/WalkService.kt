@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.walk
+package dev.omakasekim.ferrite.walk
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.Polyline
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.Polyline
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope

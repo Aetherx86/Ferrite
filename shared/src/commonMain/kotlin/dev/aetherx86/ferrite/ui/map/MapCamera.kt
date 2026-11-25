@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.map
+package dev.omakasekim.ferrite.ui.map
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.walk
+package dev.omakasekim.ferrite.ui.walk
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -48,33 +48,33 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.LocalProjection
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.map.BaseMap
-import dev.aetherx86.ferrite.map.MapPois
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.Chip
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.NoticeCard
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.SearchField
-import dev.aetherx86.ferrite.walk.PathKind
-import dev.aetherx86.ferrite.walk.Place
-import dev.aetherx86.ferrite.walk.PlaceSearch
-import dev.aetherx86.ferrite.walk.StationExit
-import dev.aetherx86.ferrite.walk.StepKind
-import dev.aetherx86.ferrite.walk.WalkGraph
-import dev.aetherx86.ferrite.walk.WalkProfile
-import dev.aetherx86.ferrite.walk.WalkRoute
-import dev.aetherx86.ferrite.walk.WalkRouter
-import dev.aetherx86.ferrite.walk.WalkService
-import dev.aetherx86.ferrite.walk.WalkStep
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.LocalProjection
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.map.BaseMap
+import dev.omakasekim.ferrite.map.MapPois
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.Chip
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.NoticeCard
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.SearchField
+import dev.omakasekim.ferrite.walk.PathKind
+import dev.omakasekim.ferrite.walk.Place
+import dev.omakasekim.ferrite.walk.PlaceSearch
+import dev.omakasekim.ferrite.walk.StationExit
+import dev.omakasekim.ferrite.walk.StepKind
+import dev.omakasekim.ferrite.walk.WalkGraph
+import dev.omakasekim.ferrite.walk.WalkProfile
+import dev.omakasekim.ferrite.walk.WalkRoute
+import dev.omakasekim.ferrite.walk.WalkRouter
+import dev.omakasekim.ferrite.walk.WalkService
+import dev.omakasekim.ferrite.walk.WalkStep
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -107,7 +107,7 @@ private sealed interface Spot {
  * Walking directions worked out on the phone from open map data, including which way has stairs and where to cross.
  */
 @Composable
-fun WalkScreen(toStation: Station? = null, fromStation: Station? = null, fromSpot: dev.aetherx86.ferrite.ui.world.NamedSpot? = null, toSpot: dev.aetherx86.ferrite.ui.world.NamedSpot? = null) {
+fun WalkScreen(toStation: Station? = null, fromStation: Station? = null, fromSpot: dev.omakasekim.ferrite.ui.world.NamedSpot? = null, toSpot: dev.omakasekim.ferrite.ui.world.NamedSpot? = null) {
     val services = LocalServices.current
     val host = LocalHost.current
     val network = services.network
@@ -119,7 +119,7 @@ fun WalkScreen(toStation: Station? = null, fromStation: Station? = null, fromSpo
     var places by remember { mutableStateOf<List<Place>>(emptyList()) }
     var searching by remember { mutableStateOf(false) }
     var searchProblem by remember { mutableStateOf<String?>(null) }
-    var safety by remember { mutableStateOf<List<dev.aetherx86.ferrite.map.MapPoi>>(emptyList()) }
+    var safety by remember { mutableStateOf<List<dev.omakasekim.ferrite.map.MapPoi>>(emptyList()) }
     var safetyLoading by remember { mutableStateOf(false) }
     var profile by remember { mutableStateOf(WalkProfile.FASTEST) }
     var graph by remember { mutableStateOf<WalkGraph?>(null) }
@@ -420,7 +420,7 @@ private fun StepRow(step: WalkStep) {
 internal fun WalkMap(graph: WalkGraph?, route: WalkRoute, modifier: Modifier) {
     val density = LocalDensity.current.density
     val network = LocalServices.current.network
-    val fonts = dev.aetherx86.ferrite.ui.common.LocalFonts.current
+    val fonts = dev.omakasekim.ferrite.ui.common.LocalFonts.current
     val measurer = androidx.compose.ui.text.rememberTextMeasurer()
     val now = remember { mutableLongStateOf(nowMillis()) }
     LaunchedEffect(Unit) { while (true) withFrameMillis { now.longValue = nowMillis() } }
@@ -523,7 +523,7 @@ internal fun WalkMap(graph: WalkGraph?, route: WalkRoute, modifier: Modifier) {
                 val c = at(station.location)
                 drawCircle(Color.White, 4.6f * density, c)
                 drawCircle(Color(station.lines.first().colorArgb), 3.2f * density, c)
-                val text = measurer.measure(station.name, dev.aetherx86.ferrite.ui.common.textStyle(fonts.sans, labelSize, FontWeight.Black, Color.White), softWrap = false, maxLines = 1)
+                val text = measurer.measure(station.name, dev.omakasekim.ferrite.ui.common.textStyle(fonts.sans, labelSize, FontWeight.Black, Color.White), softWrap = false, maxLines = 1)
                 val left = (c.x + 8f * density).coerceAtMost(size.width - text.size.width - 2f)
                 val box = androidx.compose.ui.geometry.Rect(left, c.y - text.size.height / 2f, left + text.size.width, c.y + text.size.height / 2f)
                 if (placed.none { it.overlaps(box) }) {

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.audio
+package dev.omakasekim.ferrite.audio
 
 import kotlin.math.PI
 import kotlin.math.exp

@@ -1,17 +1,17 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.isInKorea
-import dev.aetherx86.ferrite.drive.BatteryPlan
-import dev.aetherx86.ferrite.drive.DriveService
-import dev.aetherx86.ferrite.drive.TaxiFare
-import dev.aetherx86.ferrite.trip.TripDay
-import dev.aetherx86.ferrite.trip.TripPlan
-import dev.aetherx86.ferrite.trip.TripStop
-import dev.aetherx86.ferrite.trip.TripStore
-import dev.aetherx86.ferrite.platform.KeyValueStore
-import dev.aetherx86.ferrite.trip.reorder
-import dev.aetherx86.ferrite.trip.timeline
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.isInKorea
+import dev.omakasekim.ferrite.drive.BatteryPlan
+import dev.omakasekim.ferrite.drive.DriveService
+import dev.omakasekim.ferrite.drive.TaxiFare
+import dev.omakasekim.ferrite.trip.TripDay
+import dev.omakasekim.ferrite.trip.TripPlan
+import dev.omakasekim.ferrite.trip.TripStop
+import dev.omakasekim.ferrite.trip.TripStore
+import dev.omakasekim.ferrite.platform.KeyValueStore
+import dev.omakasekim.ferrite.trip.reorder
+import dev.omakasekim.ferrite.trip.timeline
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -33,7 +33,7 @@ class DriveTest {
             {"mode":"WALK","from":{"name":"START"},"to":{"name":"Hotel de Ville"},"duration":180,"legGeometry":{"points":"_p~iF~ps|U","precision":5}},
             {"mode":"SUBWAY","routeShortName":"1","headsign":"La Defense","routeColor":"ffbe00","realTime":true,"from":{"name":"Hotel de Ville"},"to":{"name":"Etoile"},"duration":720,"intermediateStops":[{"name":"a"},{"name":"b"}],"legGeometry":{"points":"_p~iF~ps|U_ulLnnqC","precision":5}}
         ]}]}"""
-        val trip = dev.aetherx86.ferrite.transit.WorldTransit.parse(text).single()
+        val trip = dev.omakasekim.ferrite.transit.WorldTransit.parse(text).single()
         assertEquals(1080, trip.seconds)
         assertEquals(1_080_000L, trip.endMs - trip.startMs)
         assertEquals("걷기", trip.legs[0].label)

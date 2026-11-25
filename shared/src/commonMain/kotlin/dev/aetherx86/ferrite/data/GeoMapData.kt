@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.data
+package dev.omakasekim.ferrite.data
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

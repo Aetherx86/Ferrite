@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.platform
+package dev.omakasekim.ferrite.platform
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -19,9 +19,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.audio.SoundSynth
-import dev.aetherx86.ferrite.core.LatLng
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.audio.SoundSynth
+import dev.omakasekim.ferrite.core.LatLng
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

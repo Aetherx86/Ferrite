@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
-import dev.aetherx86.ferrite.core.KstTime
-import dev.aetherx86.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.KstTime
+import dev.omakasekim.ferrite.core.kstOf
 
 /**
  * Works out when trains should come, from how often a line usually runs.

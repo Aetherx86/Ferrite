@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
-import dev.aetherx86.ferrite.platform.WebHost
+import dev.omakasekim.ferrite.platform.WebHost
 
 private fun queryParameter(name: String): String? = js("new URLSearchParams(window.location.search).get(name)")
 

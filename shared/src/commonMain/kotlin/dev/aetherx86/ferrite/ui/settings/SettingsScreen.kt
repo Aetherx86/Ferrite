@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.settings
+package dev.omakasekim.ferrite.ui.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,18 +34,18 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.BuildInfo
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.GhostButton
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.IconButton
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.Panel
-import dev.aetherx86.ferrite.ui.common.SectionTitle
-import dev.aetherx86.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.BuildInfo
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.GhostButton
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.IconButton
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.Panel
+import dev.omakasekim.ferrite.ui.common.SectionTitle
+import dev.omakasekim.ferrite.ui.common.textStyle
 
 @Composable
 fun SettingsScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
@@ -88,7 +88,7 @@ fun SettingsScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
             Panel(onClick = onLicenses) {
                 Label("데이터 출처와 오픈소스 라이선스", size = 14.sp, weight = FontWeight.Bold)
                 Spacer(Modifier.height(3.dp))
-                Label("Ferrite ${BuildInfo.VERSION} · Aetherx86", size = 12.sp, color = Palette.TextDim)
+                Label("Ferrite ${BuildInfo.VERSION} · omakasekim", size = 12.sp, color = Palette.TextDim)
             }
             Spacer(Modifier.height(30.dp))
         }

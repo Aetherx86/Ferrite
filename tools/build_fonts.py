@@ -46,7 +46,7 @@ def rename(font, family, style):
         elif record.nameID in (2, 17):
             record.string = style
         elif record.nameID == 3:
-            record.string = f"Aetherx86;{postscript}"
+            record.string = f"omakasekim;{postscript}"
         elif record.nameID == 4:
             record.string = full
         elif record.nameID == 6:

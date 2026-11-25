@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.common
+package dev.omakasekim.ferrite.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,7 +32,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Line
 
 @Composable
 fun Panel(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null, content: @Composable ColumnScope.() -> Unit) {

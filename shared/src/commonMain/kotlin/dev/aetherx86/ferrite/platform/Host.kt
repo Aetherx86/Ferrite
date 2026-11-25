@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.platform
+package dev.omakasekim.ferrite.platform
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.core.LatLng
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.core.LatLng
 
 /** What the shared code needs from the operating system. */
 interface Host {

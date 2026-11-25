@@ -1,9 +1,9 @@
-package dev.aetherx86.ferrite.walk
+package dev.omakasekim.ferrite.walk
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.bearingDegrees
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.bearingDegrees
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope

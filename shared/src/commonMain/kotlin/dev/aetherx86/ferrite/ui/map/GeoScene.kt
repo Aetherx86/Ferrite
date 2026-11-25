@@ -1,13 +1,13 @@
-package dev.aetherx86.ferrite.ui.map
+package dev.omakasekim.ferrite.ui.map
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.data.GeoMapData
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.MapShape
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.data.TransitNetwork
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.data.GeoMapData
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.MapShape
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.data.TransitNetwork
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.max

@@ -1,14 +1,14 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.airport.Flights
-import dev.aetherx86.ferrite.airport.Movement
-import dev.aetherx86.ferrite.bus.BusFeed
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.epochOfKst
-import dev.aetherx86.ferrite.data.CongestionDto
-import dev.aetherx86.ferrite.data.CongestionTable
-import dev.aetherx86.ferrite.live.FeedException
-import dev.aetherx86.ferrite.live.SeoulArrivals
+import dev.omakasekim.ferrite.airport.Flights
+import dev.omakasekim.ferrite.airport.Movement
+import dev.omakasekim.ferrite.bus.BusFeed
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.epochOfKst
+import dev.omakasekim.ferrite.data.CongestionDto
+import dev.omakasekim.ferrite.data.CongestionTable
+import dev.omakasekim.ferrite.live.FeedException
+import dev.omakasekim.ferrite.live.SeoulArrivals
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.board
+package dev.omakasekim.ferrite.ui.board
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -53,34 +53,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.live.ArrivalFeed
-import dev.aetherx86.ferrite.live.BoardEngine
-import dev.aetherx86.ferrite.live.BoardFrame
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.live.CarLoad
-import dev.aetherx86.ferrite.live.CarLoads
-import dev.aetherx86.ferrite.live.DemoFeed
-import dev.aetherx86.ferrite.live.FeedSource
-import dev.aetherx86.ferrite.live.LoadLevel
-import dev.aetherx86.ferrite.live.Phase
-import dev.aetherx86.ferrite.live.SeoulArrivals
-import dev.aetherx86.ferrite.live.ServiceEstimator
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.AppIcon
-import dev.aetherx86.ferrite.ui.common.FitText
-import dev.aetherx86.ferrite.ui.common.Icon
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.contrastOn
-import dev.aetherx86.ferrite.ui.common.textStyle
-import dev.aetherx86.ferrite.ui.common.visibleOnDark
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.live.ArrivalFeed
+import dev.omakasekim.ferrite.live.BoardEngine
+import dev.omakasekim.ferrite.live.BoardFrame
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.live.CarLoad
+import dev.omakasekim.ferrite.live.CarLoads
+import dev.omakasekim.ferrite.live.DemoFeed
+import dev.omakasekim.ferrite.live.FeedSource
+import dev.omakasekim.ferrite.live.LoadLevel
+import dev.omakasekim.ferrite.live.Phase
+import dev.omakasekim.ferrite.live.SeoulArrivals
+import dev.omakasekim.ferrite.live.ServiceEstimator
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.AppIcon
+import dev.omakasekim.ferrite.ui.common.FitText
+import dev.omakasekim.ferrite.ui.common.Icon
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.contrastOn
+import dev.omakasekim.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.ui.common.visibleOnDark
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlin.math.hypot
@@ -348,7 +348,7 @@ fun BoardScreen(station: Station, initialLine: Line?, demo: Boolean, onBack: () 
 }
 
 /** A weekday evening, so a demonstration shows the congestion display doing something. */
-private fun rushHour(): Long = dev.aetherx86.ferrite.core.epochOfKst(2026, 11, 2, 18, 0, 0)
+private fun rushHour(): Long = dev.omakasekim.ferrite.core.epochOfKst(2026, 11, 2, 18, 0, 0)
 
 private fun arrivedAt(frame: BoardFrame): Long = frame.atPlatform?.arrivalAtMs ?: 0L
 
@@ -382,7 +382,7 @@ private fun WaitingPage(
     lineColor: Color,
     display: BoardDisplay,
     source: FeedSource,
-    time: dev.aetherx86.ferrite.core.KstTime,
+    time: dev.omakasekim.ferrite.core.KstTime,
     cars: List<CarLoad>,
     frame: () -> BoardFrame,
     clock: () -> Long,
@@ -471,7 +471,7 @@ private fun ArrivedPage(
     lineColor: Color,
     shown: PlatformDisplay,
     source: FeedSource,
-    time: dev.aetherx86.ferrite.core.KstTime,
+    time: dev.omakasekim.ferrite.core.KstTime,
     cars: List<CarLoad>,
     frame: () -> BoardFrame,
     clock: () -> Long,

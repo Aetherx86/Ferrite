@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.core
+package dev.omakasekim.ferrite.core
 
 private const val SYLLABLE_BASE = 0xAC00
 private const val SYLLABLE_COUNT = 11172

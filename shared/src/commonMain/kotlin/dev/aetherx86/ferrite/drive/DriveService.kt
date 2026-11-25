@@ -1,12 +1,12 @@
-package dev.aetherx86.ferrite.drive
+package dev.omakasekim.ferrite.drive
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.platform.httpRequest
-import dev.aetherx86.ferrite.walk.StepKind
-import dev.aetherx86.ferrite.walk.WalkProfile
-import dev.aetherx86.ferrite.walk.WalkRoute
-import dev.aetherx86.ferrite.walk.WalkService
-import dev.aetherx86.ferrite.walk.WalkStep
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.walk.StepKind
+import dev.omakasekim.ferrite.walk.WalkProfile
+import dev.omakasekim.ferrite.walk.WalkRoute
+import dev.omakasekim.ferrite.walk.WalkService
+import dev.omakasekim.ferrite.walk.WalkStep
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.boolean

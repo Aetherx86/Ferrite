@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.drive
+package dev.omakasekim.ferrite.ui.drive
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,27 +32,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.isInKorea
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.nowMillis
-import dev.aetherx86.ferrite.core.two
-import dev.aetherx86.ferrite.data.Station
-import dev.aetherx86.ferrite.drive.BatteryPlan
-import dev.aetherx86.ferrite.drive.DriveOptions
-import dev.aetherx86.ferrite.drive.DriveRoute
-import dev.aetherx86.ferrite.drive.DriveService
-import dev.aetherx86.ferrite.drive.TaxiFare
-import dev.aetherx86.ferrite.drive.Vehicle
-import dev.aetherx86.ferrite.map.MapPoi
-import dev.aetherx86.ferrite.map.MapPois
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.ui.common.Chip
-import dev.aetherx86.ferrite.ui.common.Label
-import dev.aetherx86.ferrite.ui.common.NoticeCard
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.PlacePicker
-import dev.aetherx86.ferrite.ui.walk.WalkMap
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.isInKorea
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.nowMillis
+import dev.omakasekim.ferrite.core.two
+import dev.omakasekim.ferrite.data.Station
+import dev.omakasekim.ferrite.drive.BatteryPlan
+import dev.omakasekim.ferrite.drive.DriveOptions
+import dev.omakasekim.ferrite.drive.DriveRoute
+import dev.omakasekim.ferrite.drive.DriveService
+import dev.omakasekim.ferrite.drive.TaxiFare
+import dev.omakasekim.ferrite.drive.Vehicle
+import dev.omakasekim.ferrite.map.MapPoi
+import dev.omakasekim.ferrite.map.MapPois
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.ui.common.Chip
+import dev.omakasekim.ferrite.ui.common.Label
+import dev.omakasekim.ferrite.ui.common.NoticeCard
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.PlacePicker
+import dev.omakasekim.ferrite.ui.walk.WalkMap
 import kotlinx.coroutines.CancellationException
 
 private class Spot(val name: String, val position: LatLng)
@@ -64,7 +64,7 @@ private fun won(value: Int): String {
 
 /** Road directions for the vehicle you are in, with what that vehicle needs to know. */
 @Composable
-fun DriveScreen(fromStation: Station? = null, toStation: Station? = null, fromSpot: dev.aetherx86.ferrite.ui.world.NamedSpot? = null, toSpot: dev.aetherx86.ferrite.ui.world.NamedSpot? = null) {
+fun DriveScreen(fromStation: Station? = null, toStation: Station? = null, fromSpot: dev.omakasekim.ferrite.ui.world.NamedSpot? = null, toSpot: dev.omakasekim.ferrite.ui.world.NamedSpot? = null) {
     val host = LocalHost.current
     var from by remember { mutableStateOf(fromSpot?.let { Spot(it.name, it.position) } ?: fromStation?.let { Spot("${it.name}역", it.location) }) }
     var to by remember { mutableStateOf(toSpot?.let { Spot(it.name, it.position) } ?: toStation?.let { Spot("${it.name}역", it.location) }) }
@@ -190,7 +190,7 @@ private const val RESERVE_PERCENT = 12
 private fun pointAlong(points: List<LatLng>, meters: Double): LatLng {
     var left = meters
     for ((a, b) in points.zipWithNext()) {
-        val d = dev.aetherx86.ferrite.core.distanceMeters(a, b)
+        val d = dev.omakasekim.ferrite.core.distanceMeters(a, b)
         if (left <= d) return b
         left -= d
     }

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
 /** Where a board's numbers come from. Shown on screen, so nothing passes for what it is not. */
 enum class FeedSource {

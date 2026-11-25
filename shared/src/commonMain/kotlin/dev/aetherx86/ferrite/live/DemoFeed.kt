@@ -1,6 +1,6 @@
-package dev.aetherx86.ferrite.live
+package dev.omakasekim.ferrite.live
 
-import dev.aetherx86.ferrite.data.Line
+import dev.omakasekim.ferrite.data.Line
 
 /**
  * A scripted run of trains, labelled on screen, for seeing the whole board without waiting on a platform.

@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.map
+package dev.omakasekim.ferrite.map
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -16,9 +16,9 @@ import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import dev.aetherx86.ferrite.platform.httpBytes
-import dev.aetherx86.ferrite.platform.httpRequest
-import dev.aetherx86.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.platform.httpBytes
+import dev.omakasekim.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.ui.common.textStyle
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

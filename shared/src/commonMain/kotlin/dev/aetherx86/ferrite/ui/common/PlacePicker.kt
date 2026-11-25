@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.common
+package dev.omakasekim.ferrite.ui.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.aetherx86.ferrite.LocalServices
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.platform.LocalHost
-import dev.aetherx86.ferrite.walk.Place
-import dev.aetherx86.ferrite.walk.PlaceSearch
+import dev.omakasekim.ferrite.LocalServices
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.platform.LocalHost
+import dev.omakasekim.ferrite.walk.Place
+import dev.omakasekim.ferrite.walk.PlaceSearch
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 

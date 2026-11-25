@@ -1,11 +1,11 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.walk.PlaceSearch
-import dev.aetherx86.ferrite.walk.StepKind
-import dev.aetherx86.ferrite.walk.WalkGraph
-import dev.aetherx86.ferrite.walk.WalkProfile
-import dev.aetherx86.ferrite.walk.WalkRouter
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.walk.PlaceSearch
+import dev.omakasekim.ferrite.walk.StepKind
+import dev.omakasekim.ferrite.walk.WalkGraph
+import dev.omakasekim.ferrite.walk.WalkProfile
+import dev.omakasekim.ferrite.walk.WalkRouter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -97,7 +97,7 @@ class WalkTest {
             {"type":40,"instruction":"계단으로 올라가기","length":0.02,"begin_shape_index":1},
             {"type":4,"instruction":"목적지 도착","length":0.0,"begin_shape_index":1}
         ]}]}}"""
-        val route = dev.aetherx86.ferrite.walk.WalkService.parse(text, WalkProfile.FASTEST)
+        val route = dev.omakasekim.ferrite.walk.WalkService.parse(text, WalkProfile.FASTEST)
         assertEquals(2073, route.meters.toInt())
         assertEquals(1805, route.seconds)
         assertEquals(1, route.stairs)
@@ -109,7 +109,7 @@ class WalkTest {
     @Test
     fun tileGeometryDecodes() {
         // A square: move to (1,1), three lines, close. From the vector tile format's own example encoding.
-        val parts = dev.aetherx86.ferrite.map.VectorTileReader.decodeGeometry(intArrayOf(9, 2, 2, 26, 8, 0, 0, 8, 7, 0, 15))
+        val parts = dev.omakasekim.ferrite.map.VectorTileReader.decodeGeometry(intArrayOf(9, 2, 2, 26, 8, 0, 0, 8, 7, 0, 15))
         assertEquals(1, parts.size)
         assertEquals(listOf(1, 1, 5, 1, 5, 5, 1, 1), parts[0].toList().take(8).let { listOf(it[0], it[1], it[2], it[3], it[4], it[5], it[0], it[1]) })
     }
@@ -126,12 +126,12 @@ class WalkTest {
             byteArrayOf(0x1A, key.size.toByte()) + key +
             byteArrayOf(0x22, value.size.toByte()) + value
         val tile = byteArrayOf(0x1A, layer.size.toByte()) + layer
-        val read = dev.aetherx86.ferrite.map.VectorTileReader.read(tile, setOf("road")).single()
+        val read = dev.omakasekim.ferrite.map.VectorTileReader.read(tile, setOf("road")).single()
         assertEquals("road", read.name)
         assertEquals("minor", read.features.single().tags["class"])
         assertEquals(2, read.features.single().type)
         assertEquals(listOf(1, 1, 3, 3), read.features.single().parts.single().toList())
-        assertTrue(dev.aetherx86.ferrite.map.VectorTileReader.read(tile, setOf("other")).isEmpty())
+        assertTrue(dev.omakasekim.ferrite.map.VectorTileReader.read(tile, setOf("other")).isEmpty())
     }
 
     @Test

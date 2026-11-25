@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.common
+package dev.omakasekim.ferrite.ui.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints

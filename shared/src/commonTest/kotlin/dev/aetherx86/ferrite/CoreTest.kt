@@ -1,14 +1,14 @@
-package dev.aetherx86.ferrite
+package dev.omakasekim.ferrite
 
-import dev.aetherx86.ferrite.audio.BoardSound
-import dev.aetherx86.ferrite.audio.SoundSynth
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.bearingDegrees
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.core.epochOfKst
-import dev.aetherx86.ferrite.core.initialOf
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.core.searchScore
+import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.audio.SoundSynth
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.bearingDegrees
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.core.epochOfKst
+import dev.omakasekim.ferrite.core.initialOf
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.core.searchScore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull

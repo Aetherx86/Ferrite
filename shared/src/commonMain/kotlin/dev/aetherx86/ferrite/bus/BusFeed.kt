@@ -1,8 +1,8 @@
-package dev.aetherx86.ferrite.bus
+package dev.omakasekim.ferrite.bus
 
-import dev.aetherx86.ferrite.core.LatLng
-import dev.aetherx86.ferrite.core.distanceMeters
-import dev.aetherx86.ferrite.platform.httpRequest
+import dev.omakasekim.ferrite.core.LatLng
+import dev.omakasekim.ferrite.core.distanceMeters
+import dev.omakasekim.ferrite.platform.httpRequest
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement

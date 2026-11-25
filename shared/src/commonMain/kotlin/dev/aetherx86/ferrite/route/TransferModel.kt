@@ -1,7 +1,7 @@
-package dev.aetherx86.ferrite.route
+package dev.omakasekim.ferrite.route
 
-import dev.aetherx86.ferrite.core.kstOf
-import dev.aetherx86.ferrite.live.ServiceEstimator
+import dev.omakasekim.ferrite.core.kstOf
+import dev.omakasekim.ferrite.live.ServiceEstimator
 import kotlin.math.roundToInt
 
 /** How much time to allow for walking between platforms. */

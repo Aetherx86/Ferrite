@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.app
+package dev.omakasekim.ferrite.app
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableStateOf
-import dev.aetherx86.ferrite.App
-import dev.aetherx86.ferrite.StartRequest
-import dev.aetherx86.ferrite.platform.AndroidHost
+import dev.omakasekim.ferrite.App
+import dev.omakasekim.ferrite.StartRequest
+import dev.omakasekim.ferrite.platform.AndroidHost
 
 class MainActivity : ComponentActivity() {
     private lateinit var host: AndroidHost

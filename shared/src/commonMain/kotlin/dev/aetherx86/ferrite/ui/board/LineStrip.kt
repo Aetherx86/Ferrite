@@ -1,4 +1,4 @@
-package dev.aetherx86.ferrite.ui.board
+package dev.omakasekim.ferrite.ui.board
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
@@ -23,14 +23,14 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
-import dev.aetherx86.ferrite.data.Line
-import dev.aetherx86.ferrite.live.BoardFrame
-import dev.aetherx86.ferrite.live.BoardPath
-import dev.aetherx86.ferrite.live.TrainMark
-import dev.aetherx86.ferrite.ui.common.LocalFonts
-import dev.aetherx86.ferrite.ui.common.Palette
-import dev.aetherx86.ferrite.ui.common.contrastOn
-import dev.aetherx86.ferrite.ui.common.textStyle
+import dev.omakasekim.ferrite.data.Line
+import dev.omakasekim.ferrite.live.BoardFrame
+import dev.omakasekim.ferrite.live.BoardPath
+import dev.omakasekim.ferrite.live.TrainMark
+import dev.omakasekim.ferrite.ui.common.LocalFonts
+import dev.omakasekim.ferrite.ui.common.Palette
+import dev.omakasekim.ferrite.ui.common.contrastOn
+import dev.omakasekim.ferrite.ui.common.textStyle
 import kotlin.math.min
 
 /** The strip of line at the bottom of a board, with trains sliding along it. All of it draws from one clock. */
