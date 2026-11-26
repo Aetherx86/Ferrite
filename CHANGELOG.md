@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0] - 2026-11-27
+
+- Line avoidance (`RouteOptions.avoidLines`) and waypoint routing (`RoutePlanner.planVia`): exclude disrupted or crowded lines from Pareto rail searches, or route through ordered intermediate stations with automatic same-line leg merging and hour-aware transfer waits.
+- Arrive-by departure solver (`RoutePlanner.arriveBy` / `TimedJourney`): computes latest departure times across Pareto options using fixed-point refinement over hour-dependent headway waits.
+- Interactive departure-time presets (`지금`, `출근 08:00`, `낮 13:00`, `퇴근 18:30`, `심야 01:00`) in the rail planner screen so riders can preview rush-hour, midday, and late-night waits and service-hour flags directly in the app and web demo.
+- Offline visit-order optimizer (`optimizeOrder`) in `TripPlan` using nearest-neighbor seeding and 2-opt local refinement over great-circle distance.
+- Fixed CI version-check path for `BuildInfo.kt`, enabled `main` push/PR triggers, and upgraded Gradle wrapper & dependencies via Dependabot PRs #2 and #3.
+
 ## [0.3.0] - 2026-11-21
 
 - Rail trips come as a set: the quickest, and each trip that saves a change for a few more minutes. None of the trips offered is beaten on both time and changes by another. The search runs in rounds, one per change, and an automated test checks it against an exhaustive search over every path on hundreds of random networks. Trips that take much longer than the quickest (more than 20 minutes or half as long again, whichever is more) are not offered.

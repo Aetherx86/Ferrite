@@ -2,8 +2,11 @@ name: Repository Guard
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*.0.0"
+  pull_request:
   workflow_dispatch:
 
 permissions:

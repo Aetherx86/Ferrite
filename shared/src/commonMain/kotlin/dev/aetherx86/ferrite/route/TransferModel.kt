@@ -22,6 +22,8 @@ data class RouteOptions(
     val pace: TransferPace = TransferPace.NORMAL,
     /** The most changes a trip may have. More than four is never a sensible way across one city's network. */
     val maxTransfers: Int = 4,
+    /** Line IDs that the search must not board (for example during a line disruption or crowding). */
+    val avoidLines: Set<String> = emptySet(),
 )
 
 /** The cost of changing trains: the walk between platforms, and the wait for the next train. */

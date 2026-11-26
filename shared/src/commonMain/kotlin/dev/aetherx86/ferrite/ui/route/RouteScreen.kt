@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.omakasekim.ferrite.LocalServices
 import dev.omakasekim.ferrite.audio.BoardSound
+import dev.omakasekim.ferrite.core.epochOfKst
 import dev.omakasekim.ferrite.core.kstOf
 import dev.omakasekim.ferrite.core.nowMillis
 import dev.omakasekim.ferrite.core.two
@@ -105,6 +106,22 @@ fun RouteScreen(
     }
 }
 
+private enum class DepartPreset(val label: String, val hour: Int?, val minute: Int) {
+    NOW("지금", null, 0),
+    RUSH_AM("출근 08:00", 8, 0),
+    MIDDAY("낮 13:00", 13, 0),
+    RUSH_PM("퇴근 18:30", 18, 30),
+    LATE_NIGHT("심야 01:00", 1, 0),
+    ;
+
+    fun resolveMs(): Long {
+        val now = nowMillis()
+        val h = hour ?: return now
+        val kst = kstOf(now)
+        return epochOfKst(kst.year, kst.month, kst.day, h, minute, 0)
+    }
+}
+
 @Composable
 private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (Station, Line?) -> Unit, onShowOnMap: (Trip) -> Unit) {
     val services = LocalServices.current
@@ -114,13 +131,14 @@ private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (St
     var to by remember(initialTo) { mutableStateOf(initialTo) }
     var editing by remember(initialFrom, initialTo) { mutableStateOf<Int?>(null) }
     var query by remember { mutableStateOf("") }
+    var departPreset by remember { mutableStateOf(DepartPreset.NOW) }
     val planner = remember(network) { RoutePlanner(network) }
     val pace = services.settings.transferPace
-    // Waits depend on how often each line runs at the hour you travel, so the search starts from now.
-    val options = remember(from, to, pace) {
+    // Waits depend on how often each line runs at the hour you travel, so users can also preview rush or late hours.
+    val options = remember(from, to, pace, departPreset) {
         val a = from
         val b = to
-        if (a == null || b == null) emptyList() else planner.journeys(a, b, RouteOptions(departAtMs = nowMillis(), pace = pace))
+        if (a == null || b == null) emptyList() else planner.journeys(a, b, RouteOptions(departAtMs = departPreset.resolveMs(), pace = pace))
     }
     var choice by remember(options) { mutableStateOf(0) }
     var tracking by remember(options) { mutableStateOf<Long?>(null) }
@@ -178,6 +196,12 @@ private fun RailPlanner(initialFrom: Station?, initialTo: Station?, onBoard: (St
             Spacer(Modifier.width(6.dp))
             TransferPace.entries.forEach { option ->
                 Chip(option.label, option == pace, { services.settings.updateTransferPace(option) })
+            }
+        }
+        Spacer(Modifier.height(6.dp))
+        Row(Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            DepartPreset.entries.forEach { preset ->
+                Chip(preset.label, preset == departPreset, { departPreset = preset })
             }
         }
         val trip = options[choice.coerceIn(0, options.lastIndex)].trip

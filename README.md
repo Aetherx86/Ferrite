@@ -185,6 +185,12 @@ If Xcode cannot find a JDK, set `JAVA_HOME` in the scheme's environment or in `~
 
 The output in `shared/build/dist/wasmJs/productionExecutable` can go on any static host. Adding `?station=삼각지&line=S4`, `?tab=map` or `?walkFrom=왕십리&walkTo=뚝섬`, `?driveFrom=왕십리&driveTo=강남` or `?trip=서울역,강남,잠실` opens that screen directly.
 
+## New in 0.4.0
+
+- **Line avoidance & via-station routing**: `RouteOptions.avoidLines` excludes disrupted or crowded lines from Pareto rail searches, and `RoutePlanner.planVia(from, via, to, options)` chains multi-stop rail journeys with same-line leg merging and hour-aware transfer waits.
+- **Arrive-by solver & departure-time presets**: `RoutePlanner.arriveBy` computes the latest departure for a target arrival timestamp using fixed-point refinement over hour-dependent headways, and the rail planner screen now offers one-tap departure presets (`지금`, `출근 08:00`, `낮 13:00`, `퇴근 18:30`, `심야 01:00`).
+- **Offline multi-stop trip optimizer**: `optimizeOrder` in `TripPlan` applies nearest-neighbor seeding + 2-opt local improvement offline.
+
 ## New in 0.3.0
 
 **Trips that trade time for changes.** The rail planner returns every trip that no other trip beats on both time and number of changes, quickest first, and the screen offers each as a choice (최단 시간, 환승 1회, 환승 없음). The search works in rounds: round k finds the quickest way to every platform with exactly k changes, starting from where the round before stopped, and keeps only what beats every earlier round. Trips that take more than 20 minutes, or half as long again, beyond the quickest are not offered. The single best trip for a preference (`RoutePlanner.plan`) and its options (`RoutePlanner.options`) work as before.

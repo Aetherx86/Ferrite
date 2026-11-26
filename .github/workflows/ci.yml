@@ -2,8 +2,11 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*.0.0"
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -26,7 +29,7 @@ jobs:
       - name: The version is the same everywhere
         run: |
           gradle_version=$(grep '^ferrite.versionName=' gradle.properties | cut -d= -f2)
-          grep -q "VERSION = \"$gradle_version\"" shared/src/commonMain/kotlin/dev/omakasekim/ferrite/BuildInfo.kt
+          grep -q "VERSION = \"$gradle_version\"" shared/src/commonMain/kotlin/dev/aetherx86/ferrite/BuildInfo.kt
           grep -q "MARKETING_VERSION = $gradle_version;" iosApp/iosApp.xcodeproj/project.pbxproj
       - name: Tests
         run: ./gradlew :shared:testAndroidHostTest --console=plain

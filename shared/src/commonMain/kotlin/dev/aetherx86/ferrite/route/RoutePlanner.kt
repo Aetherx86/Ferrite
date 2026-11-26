@@ -56,6 +56,13 @@ data class Journey(
         }
 }
 
+/** A [Journey] paired with its resolved departure and arrival timestamps in epoch milliseconds. */
+data class TimedJourney(
+    val departAtMs: Long,
+    val arriveAtMs: Long,
+    val journey: Journey,
+)
+
 /** Finds trips on the rail network. It runs on the device and needs no connection. */
 class RoutePlanner(private val network: TransitNetwork) {
     private data class State(val station: Int, val line: String)
@@ -146,7 +153,9 @@ class RoutePlanner(private val network: TransitNetwork) {
         val bestAny = HashMap<State, Int>()
         var bestTarget = Int.MAX_VALUE
         val found = ArrayList<Pair<Int, State>>()
-        var seeds: Map<State, Label> = from.lines.associate { State(from.id, it.id) to Label(0, null, ride = false) }
+        var seeds: Map<State, Label> = from.lines
+            .filter { it.id !in options.avoidLines }
+            .associate { State(from.id, it.id) to Label(0, null, ride = false) }
         for (round in 0..options.maxTransfers.coerceIn(0, MAX_ROUNDS)) {
             if (seeds.isEmpty()) break
             val labels = HashMap<State, Label>()
@@ -194,7 +203,7 @@ class RoutePlanner(private val network: TransitNetwork) {
                 if (!label.ride) continue
                 val station = network.station(state.station) ?: continue
                 for (other in station.lines) {
-                    if (other.id == state.line) continue
+                    if (other.id == state.line || other.id in options.avoidLines) continue
                     val walk = TransferModel.walkSeconds(network.transferSeconds(state.station, state.line, other.id), options.pace)
                     val onPlatform = label.time + walk
                     val wait = TransferModel.waitSeconds(other.id, options.departAtMs?.plus(onPlatform * 1000L))
@@ -223,6 +232,102 @@ class RoutePlanner(private val network: TransitNetwork) {
         val kept = front.filter { it.seconds <= limit }
         val fewest = kept.minOf { it.transferCount }
         return kept.mapIndexed { index, trip -> Journey(trip, fastest = index == 0, fewestTransfers = trip.transferCount == fewest) }
+    }
+
+    /**
+     * Plans a rail trip from [from] to [to] passing through every waypoint in [via] in order.
+     * Consecutive segments that stay on the same line are merged cleanly; line changes at a
+     * waypoint include the measured transfer walk and hour-aware wait.
+     */
+    fun planVia(
+        from: Station,
+        via: List<Station>,
+        to: Station,
+        options: RouteOptions = RouteOptions(),
+    ): Trip? {
+        val stops = buildList {
+            add(from)
+            for (station in via) {
+                if (last().id != station.id) add(station)
+            }
+            if (last().id != to.id) add(to)
+        }
+        if (stops.size < 2) return null
+        if (stops.size == 2) return journeys(stops[0], stops[1], options).firstOrNull()?.trip
+
+        val mergedLegs = ArrayList<Leg>()
+        val mergedTransfers = ArrayList<TripTransfer>()
+        var elapsed = 0
+        var outside = options.departAtMs != null && !TransferModel.inService(options.departAtMs)
+
+        for ((start, end) in stops.zipWithNext()) {
+            val segDepart = options.departAtMs?.plus(elapsed * 1000L)
+            val segTrip = journeys(start, end, options.copy(departAtMs = segDepart)).firstOrNull()?.trip ?: return null
+            if (segTrip.outsideServiceHours) outside = true
+            val prevLeg = mergedLegs.lastOrNull()
+            val firstLeg = segTrip.legs.firstOrNull() ?: return null
+            if (prevLeg != null) {
+                if (prevLeg.line.id == firstLeg.line.id) {
+                    val combinedStations = prevLeg.stations + firstLeg.stations.drop(1)
+                    mergedLegs[mergedLegs.lastIndex] = Leg(prevLeg.line, combinedStations, prevLeg.seconds + firstLeg.seconds)
+                    mergedLegs.addAll(segTrip.legs.drop(1))
+                } else {
+                    val walk = TransferModel.walkSeconds(network.transferSeconds(start.id, prevLeg.line.id, firstLeg.line.id), options.pace)
+                    val atPlatform = options.departAtMs?.plus((elapsed + walk) * 1000L)
+                    if (atPlatform != null && !TransferModel.inService(atPlatform)) outside = true
+                    val wait = TransferModel.waitSeconds(firstLeg.line.id, atPlatform)
+                    mergedTransfers += TripTransfer(start, prevLeg.line, firstLeg.line, walk, wait)
+                    elapsed += walk + wait
+                    mergedLegs.addAll(segTrip.legs)
+                }
+            } else {
+                mergedLegs.addAll(segTrip.legs)
+            }
+            mergedTransfers.addAll(segTrip.transfers)
+            elapsed += segTrip.seconds
+        }
+        val rideSeconds = mergedLegs.sumOf { it.seconds }
+        val changeSeconds = mergedTransfers.sumOf { it.seconds + it.waitSeconds }
+        val meters = mergedLegs.sumOf { leg -> leg.stations.zipWithNext().sumOf { (a, b) -> distanceMeters(a.location, b.location) } } * TRACK_FACTOR
+        return Trip(mergedLegs, mergedTransfers, rideSeconds + changeSeconds, meters, fareOf(mergedLegs, meters), outside)
+    }
+
+    /**
+     * Computes latest departure times for each Pareto option so that arrival is at or before [arriveByMs].
+     * Uses bounded fixed-point refinement to account for hour-dependent transfer waits.
+     */
+    fun arriveBy(
+        from: Station,
+        to: Station,
+        arriveByMs: Long,
+        options: RouteOptions = RouteOptions(),
+    ): List<TimedJourney> {
+        val baseline = journeys(from, to, options.copy(departAtMs = null))
+        if (baseline.isEmpty()) return emptyList()
+        val quickestGuess = baseline.first().trip.seconds
+        var depart = arriveByMs - quickestGuess * 1000L
+        var best = journeys(from, to, options.copy(departAtMs = depart))
+        repeat(4) {
+            val top = best.firstOrNull() ?: return emptyList()
+            val candidate = arriveByMs - top.trip.seconds * 1000L
+            if (candidate == depart) return@repeat
+            depart = candidate
+            best = journeys(from, to, options.copy(departAtMs = depart))
+        }
+        return best.map { journey ->
+            var d = arriveByMs - journey.trip.seconds * 1000L
+            var chosen = journey
+            repeat(3) {
+                val refreshed = journeys(from, to, options.copy(departAtMs = d))
+                    .firstOrNull { it.trip.transferCount == journey.trip.transferCount }
+                    ?: return@repeat
+                val arrival = d + refreshed.trip.seconds * 1000L
+                chosen = refreshed
+                if (arrival <= arriveByMs && arriveByMs - arrival < 60_000L) return@repeat
+                d = arriveByMs - refreshed.trip.seconds * 1000L
+            }
+            TimedJourney(departAtMs = d, arriveAtMs = d + chosen.trip.seconds * 1000L, journey = chosen)
+        }
     }
 
     private fun stepsTo(rounds: List<Map<State, Label>>, round: Int, end: State): List<Step> {
